@@ -1,4 +1,4 @@
-class CandidatesController < ApplicationController
+class Api::V1::CandidatesController < ApplicationController
   before_action :set_candidate, only: %i[ show update destroy ]
 
   # GET /candidates

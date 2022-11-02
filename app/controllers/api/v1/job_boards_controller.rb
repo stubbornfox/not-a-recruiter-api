@@ -1,4 +1,4 @@
-class JobBoardsController < ApplicationController
+class Api::V1::JobBoardsController < ApplicationController
   before_action :set_job_board, only: %i[ show update destroy ]
 
   # GET /job_boards
