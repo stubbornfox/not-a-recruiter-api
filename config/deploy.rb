@@ -1,7 +1,7 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.17.1"
 
-set :application, "not_a_rercruiter_api"
+set :application, "not_a_recruiter_api"
 set :repo_url, "git@github.com:stubbornfox/not-a-recruiter-api.git"
 
 # Default branch is :master
