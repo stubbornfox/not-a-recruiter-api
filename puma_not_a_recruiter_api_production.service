@@ -1,0 +1,18 @@
+[Unit]
+Description=Puma HTTP Server for not_a_recruiter_api (production)
+After=network.target
+
+[Service]
+Type=simple
+User=deploy
+WorkingDirectory=/deploy/apps/not_a_recruiter_api/current
+ExecStart=/home/deploy/.rvm/bin/rvm default do bundle exec puma -C /deploy/apps/not_a_recruiter_api/shared/puma.rb
+ExecReload=/bin/kill -TSTP $MAINPID
+StandardOutput=append:/deploy/apps/not_a_recruiter_api/current/log/puma.access.log
+StandardError=append:/deploy/apps/not_a_recruiter_api/current/log/puma.error.log
+Restart=no
+RestartSec=1
+SyslogIdentifier=puma
+
+[Install]
+WantedBy=multi-user.target

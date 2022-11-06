@@ -18,7 +18,7 @@ class Api::V1::CandidatesController < ApplicationController
     @candidate = Candidate.new(candidate_params)
 
     if @candidate.save
-      render json: @candidate, status: :created, location: @candidate
+      render json: @candidate, status: :created, location: api_v1_candidate_path(@candidate)
     else
       render json: @candidate.errors, status: :unprocessable_entity
     end
@@ -46,6 +46,6 @@ class Api::V1::CandidatesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def candidate_params
-      params.fetch(:candidate, {})
+      params.fetch(:candidate, {}).permit!
     end
 end
