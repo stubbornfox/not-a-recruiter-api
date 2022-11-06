@@ -46,6 +46,6 @@ class Api::V1::CandidatesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def candidate_params
-      params.fetch(:candidate, {}).permit!
+      params.require(:candidate).permit(:first_name, :last_name, :headline)
     end
 end

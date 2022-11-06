@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :job_boards
+      resources :jobs
       resources :candidates
     end
   end
