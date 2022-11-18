@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_12_163921) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_18_133240) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_12_163921) do
     t.string "applicant_requirement_location"
     t.string "slug"
     t.index ["slug"], name: "index_jobs_on_slug", unique: true
+  end
+
+  create_table "organizations", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "website_url"
+    t.integer "remote_level"
+    t.string "slug"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_organizations_on_slug", unique: true
+    t.index ["user_id"], name: "index_organizations_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
