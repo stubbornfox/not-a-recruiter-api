@@ -4,7 +4,7 @@ class Api::V1::OrganizationsController < ApplicationController
 
   # GET /organizations
   def index
-    @organizations = Organization.all
+    @organizations = @current_user.organizations
 
     render json: @organizations
   end

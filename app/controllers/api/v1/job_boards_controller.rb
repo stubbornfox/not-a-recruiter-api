@@ -1,4 +1,5 @@
 class Api::V1::JobBoardsController < ApplicationController
+  before_action :authorize_request
   before_action :set_job_board, only: %i[ show update destroy ]
 
   # GET /job_boards
@@ -18,7 +19,7 @@ class Api::V1::JobBoardsController < ApplicationController
     @job_board = JobBoard.new(job_board_params)
 
     if @job_board.save
-      render json: @job_board, status: :created, location: @job_board
+      render json: @job_board, status: :created, location: api_v1_job_board_path @job_board
     else
       render json: @job_board.errors, status: :unprocessable_entity
     end
@@ -46,6 +47,6 @@ class Api::V1::JobBoardsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def job_board_params
-      params.fetch(:job_board, {})
+      params.require(:job_board).permit([:title, :seo_title, :seo_description, :url, :custom_domain_url, :intro, :header_setup, :og_image_setup, :organization_id])
     end
 end

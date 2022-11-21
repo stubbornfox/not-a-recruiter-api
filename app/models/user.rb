@@ -8,4 +8,8 @@ class User < ApplicationRecord
             if: -> { new_record? || !password.nil? }
 
   has_many :organizations, dependent: :destroy
+
+  def current_organization
+    organizations.first
+  end
 end

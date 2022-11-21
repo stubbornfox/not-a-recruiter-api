@@ -1,5 +1,7 @@
 class Organization < ApplicationRecord
   belongs_to :user
 
-  enum :remote_level, [ :no_remote, :some_remote, :mostly_remote, :fully_distributed]
+  has_many :job_boards
+
+  enum :remote_level, [:no_remote, :some_remote, :mostly_remote, :fully_distributed]
 end
