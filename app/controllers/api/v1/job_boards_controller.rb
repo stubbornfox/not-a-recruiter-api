@@ -19,7 +19,7 @@ class Api::V1::JobBoardsController < ApplicationController
     @job_board = JobBoard.new(job_board_params)
 
     if @job_board.save
-      render json: @job_board, status: :created, location: api_v1_job_board_path @job_board
+      render json: @job_board, status: :created, location: api_v1_job_board_path(@job_board)
     else
       render json: @job_board.errors, status: :unprocessable_entity
     end
