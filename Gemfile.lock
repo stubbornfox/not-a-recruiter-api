@@ -105,6 +105,9 @@ GEM
     io-console (0.5.11)
     irb (1.4.2)
       reline (>= 0.3.0)
+    jbuilder (2.11.5)
+      actionview (>= 5.0.0)
+      activesupport (>= 5.0.0)
     jwt (2.5.0)
     loofah (2.19.0)
       crass (~> 1.0.2)
@@ -200,6 +203,7 @@ DEPENDENCIES
   capistrano3-puma
   debug
   friendly_id (~> 5.4.0)
+  jbuilder (~> 2.6)
   jwt
   pg (~> 1.1)
   pg_search

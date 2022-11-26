@@ -5,15 +5,10 @@ class Api::V1::JobBoardsController < ApplicationController
   # GET /job_boards
   def index
     @job_boards = JobBoard.where(organization_id: @current_user.organization_ids)
-
-    render json: @job_boards.map { |job_board|
-      job_board.as_json.merge({ logo_image: job_board.logo_image.attached? && url_for(job_board.logo_image) })
-    }
   end
 
   # GET /job_boards/1
   def show
-    render json: @job_board
   end
 
   # POST /job_boards
@@ -30,7 +25,7 @@ class Api::V1::JobBoardsController < ApplicationController
   # PATCH/PUT /job_boards/1
   def update
     if @job_board.update(job_board_params)
-      render json: @job_board
+      render :show
     else
       render json: @job_board.errors, status: :unprocessable_entity
     end
@@ -49,6 +44,11 @@ class Api::V1::JobBoardsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def job_board_params
-      params.require(:job_board).permit([:title, :logo_image, :seo_title, :seo_description, :url, :custom_domain_url, :intro, :header_setup, :og_image_setup, :organization_id])
+      params.require(:job_board).permit([
+        :title, :logo_image, :social_media_image,
+        :seo_title, :seo_description,
+        :url, :custom_domain_url,
+        :banner_setup, :banner_video_url,
+        :intro, :header_setup, :og_image_setup, :organization_id]).merge!(@current_user.current_organization_id)
     end
 end

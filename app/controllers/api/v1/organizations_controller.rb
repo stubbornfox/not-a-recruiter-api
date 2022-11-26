@@ -1,6 +1,6 @@
 class Api::V1::OrganizationsController < ApplicationController
   before_action :authorize_request
-  before_action :set_organization, only: %i[ show update destroy ]
+  before_action :set_organization, only: %i[ show update destroy]
 
   # GET /organizations
   def index
@@ -17,7 +17,8 @@ class Api::V1::OrganizationsController < ApplicationController
   # POST /organizations
   def create
     @organization = @current_user.organizations.new(organization_params)
-
+    @organization.build_job_board
+    @organization.organizations_users.build(user_id: @current_user.id, active: true)
     if @organization.save
       render json: @organization, status: :created, location: api_v1_organization_path(@organization)
     else
@@ -42,7 +43,7 @@ class Api::V1::OrganizationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_organization
-      @organization = Organization.find(params[:id])
+      @organization = @current_user.organizations.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

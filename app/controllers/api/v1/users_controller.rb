@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :set_user, only: %i[ show update destroy ]
+  before_action :set_user, only: %i[ show update destroy]
   before_action :authorize_request, except: :create
 
   # GET /users
@@ -36,6 +36,12 @@ class Api::V1::UsersController < ApplicationController
   # DELETE /users/1
   def destroy
     @user.destroy
+  end
+
+
+  def me
+    render json: {
+        username: @current_user.username, email: @current_user.email, name: @current_user.name, id: @current_user.id, organization_ids: @current_user.organization_ids, organization: @current_user.organization }, status: :ok
   end
 
   private

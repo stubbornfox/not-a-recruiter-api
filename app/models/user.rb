@@ -7,9 +7,9 @@ class User < ApplicationRecord
             length: { minimum: 6 },
             if: -> { new_record? || !password.nil? }
 
-  has_many :organizations, dependent: :destroy
 
-  def current_organization
-    organizations.first
-  end
+  has_and_belongs_to_many :organizations
+  has_many :organizations_users
+  has_one :active_organization_user,  -> { where(active: true) }, class_name: 'OrganizationsUser'
+  has_one :organization, through: :active_organization_user
 end

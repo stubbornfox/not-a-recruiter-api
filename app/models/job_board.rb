@@ -7,8 +7,4 @@ class JobBoard < ApplicationRecord
 
   enum :og_image_setup, [:default, :custom, :nothing]
   enum :header_setup, [:logo_only, :name_only, :logo_and_name]
-
-  def photo_url
-    logo_image.url(:original)
-  end
 end

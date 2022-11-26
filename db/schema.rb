@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_20_072834) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_26_125214) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -64,6 +64,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_20_072834) do
     t.integer "header_setup"
     t.string "slug"
     t.bigint "organization_id"
+    t.integer "banner_setup"
+    t.string "banner_video_url"
     t.index ["organization_id"], name: "index_job_boards_on_organization_id"
     t.index ["slug"], name: "index_job_boards_on_slug", unique: true
   end
@@ -94,6 +96,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_20_072834) do
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_organizations_on_slug", unique: true
     t.index ["user_id"], name: "index_organizations_on_user_id"
+  end
+
+  create_table "organizations_users", force: :cascade do |t|
+    t.bigint "organization_id", null: false
+    t.bigint "user_id", null: false
+    t.boolean "active", default: false
+    t.index ["organization_id", "user_id"], name: "index_organizations_users_on_organization_id_and_user_id"
+    t.index ["user_id", "organization_id"], name: "index_organizations_users_on_user_id_and_organization_id"
   end
 
   create_table "users", force: :cascade do |t|
