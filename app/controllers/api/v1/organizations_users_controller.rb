@@ -4,9 +4,9 @@ class Api::V1::OrganizationsUsersController < ApplicationController
 
   def active
     if @organizations_user.update(active: true)
-      render json: { acitve: true }, status: :ok
+      render json: @organizations_user.organization, status: :ok
     else
-      render json: { acitve: false }, status: :unprocessable_entity
+      render json: @organizations_user.organization, status: :unprocessable_entity
     end
   end
 

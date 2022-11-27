@@ -5,6 +5,7 @@ class JobBoard < ApplicationRecord
 
   belongs_to :organization
 
-  enum :og_image_setup, [:default, :custom, :nothing]
-  enum :header_setup, [:logo_only, :name_only, :logo_and_name]
+  enum :og_image_setup, [:default, :custom, :nothing], default: :default
+  enum :header_setup, [:logo_only, :name_only, :logo_and_name], default: :logo_and_name
+  enum :banner_setup, [:no_banner, :image, :video], default: :no_banner
 end

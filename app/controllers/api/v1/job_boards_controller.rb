@@ -48,7 +48,7 @@ class Api::V1::JobBoardsController < ApplicationController
         :title, :logo_image, :social_media_image,
         :seo_title, :seo_description,
         :url, :custom_domain_url,
-        :banner_setup, :banner_video_url,
-        :intro, :header_setup, :og_image_setup, :organization_id]).merge!(@current_user.current_organization_id)
+        :banner_setup, :banner_video_url, :banner_image,
+        :intro, :header_setup, :og_image_setup, :slug])
     end
 end
