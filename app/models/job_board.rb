@@ -1,3 +1,24 @@
+# == Schema Information
+#
+# Table name: job_boards
+#
+#  id                :bigint           not null, primary key
+#  title             :string
+#  description       :text
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  seo_title         :string
+#  seo_description   :text
+#  url               :string
+#  custom_domain_url :string
+#  intro             :text
+#  og_image_setup    :integer
+#  header_setup      :integer
+#  slug              :string
+#  organization_id   :bigint
+#  banner_setup      :integer
+#  banner_video_url  :string
+#
 class JobBoard < ApplicationRecord
   has_one_attached :logo_image
   has_one_attached :social_media_image

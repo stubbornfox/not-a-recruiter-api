@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: organizations
+#
+#  id           :bigint           not null, primary key
+#  name         :string
+#  description  :text
+#  website_url  :string
+#  remote_level :integer
+#  slug         :string
+#  user_id      :bigint
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
 class Organization < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: [:slugged]
