@@ -4,7 +4,7 @@ class Api::V1::JobBoardsController < ApplicationController
 
   # GET /job_boards
   def index
-    @job_boards = JobBoard.where(organization_id: @current_user.organization_ids)
+    @job_boards = JobBoard.where(organization: @current_user.organization)
   end
 
   # GET /job_boards/1

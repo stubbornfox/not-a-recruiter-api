@@ -12,4 +12,5 @@ class User < ApplicationRecord
   has_many :organizations_users
   has_one :active_organization_user,  -> { where(active: true) }, class_name: 'OrganizationsUser'
   has_one :organization, through: :active_organization_user
+  has_many :jobs
 end

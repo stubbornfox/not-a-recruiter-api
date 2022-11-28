@@ -9,6 +9,12 @@ class Job < ApplicationRecord
                     tsearch: { any_word: true }
                   }
 
+
+  belongs_to :user
+  belongs_to :organization
+
+  scope :in_organization, -> (org) { where(organization: org) }
+
   def title_and_location
     "#{title} in #{location}"
   end
