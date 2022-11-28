@@ -40,8 +40,6 @@ class Api::V1::UsersController < ApplicationController
 
 
   def me
-    render json: {
-        username: @current_user.username, email: @current_user.email, name: @current_user.name, id: @current_user.id, organization_ids: @current_user.organization_ids, organization: @current_user.organization }, status: :ok
   end
 
   private
@@ -52,6 +50,6 @@ class Api::V1::UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name, :username, :email,  :password, :password_confirmation)
+      params.require(:user).permit(:first_name, :last_name, :email,  :password, :password_confirmation, :profile_picture)
     end
 end

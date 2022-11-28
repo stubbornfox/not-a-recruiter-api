@@ -3,12 +3,12 @@
 # Table name: users
 #
 #  id              :bigint           not null, primary key
-#  name            :string
-#  username        :string
 #  email           :string
 #  password_digest :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  last_name       :string
+#  first_name      :string
 #
 class User < ApplicationRecord
   has_secure_password
@@ -25,4 +25,6 @@ class User < ApplicationRecord
   has_one :active_organization_user,  -> { where(active: true) }, class_name: 'OrganizationsUser'
   has_one :organization, through: :active_organization_user
   has_many :jobs
+
+  has_one_attached :profile_picture
 end
