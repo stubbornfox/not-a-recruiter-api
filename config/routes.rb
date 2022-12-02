@@ -12,6 +12,12 @@ Rails.application.routes.draw do
           put :active
         end
       end
+
+      namespace :publics do
+        resources :organizations, only: [:show] do
+          resources :jobs, only: [:index, :show]
+        end
+      end
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

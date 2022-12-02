@@ -5,8 +5,6 @@ class Api::V1::JobsController < ApplicationController
   # GET /jobs
   def index
     @jobs = @current_user.jobs.in_organization(@current_user.organization)
-
-    render json: @jobs
   end
 
   # GET /jobs/1
