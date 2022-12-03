@@ -2,10 +2,15 @@
 #
 # Table name: organizations_users
 #
-#  organization_id :bigint           not null
-#  user_id         :bigint           not null
 #  id              :bigint           not null, primary key
 #  active          :boolean          default(FALSE)
+#  organization_id :bigint           not null
+#  user_id         :bigint           not null
+#
+# Indexes
+#
+#  index_organizations_users_on_organization_id_and_user_id  (organization_id,user_id)
+#  index_organizations_users_on_user_id_and_organization_id  (user_id,organization_id)
 #
 class OrganizationsUser < ApplicationRecord
   belongs_to :organization

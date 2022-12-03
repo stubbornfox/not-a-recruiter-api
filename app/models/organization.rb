@@ -3,14 +3,19 @@
 # Table name: organizations
 #
 #  id           :bigint           not null, primary key
-#  name         :string
 #  description  :text
-#  website_url  :string
+#  name         :string
 #  remote_level :integer
 #  slug         :string
-#  user_id      :bigint
+#  website_url  :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  user_id      :bigint
+#
+# Indexes
+#
+#  index_organizations_on_slug     (slug) UNIQUE
+#  index_organizations_on_user_id  (user_id)
 #
 class Organization < ApplicationRecord
   extend FriendlyId

@@ -3,19 +3,30 @@
 # Table name: jobs
 #
 #  id                             :bigint           not null, primary key
-#  title                          :string
-#  description                    :text
-#  location                       :string
+#  applicant_requirement_location :string
+#  base_salary                    :float
 #  category                       :string
+#  description                    :text
+#  employment_type                :string
+#  location                       :string
+#  slug                           :string
+#  title                          :string
+#  valid_through                  :datetime
 #  created_at                     :datetime         not null
 #  updated_at                     :datetime         not null
-#  valid_through                  :datetime
-#  employment_type                :string
-#  base_salary                    :float
-#  applicant_requirement_location :string
-#  slug                           :string
-#  user_id                        :bigint           not null
 #  organization_id                :bigint           not null
+#  user_id                        :bigint           not null
+#
+# Indexes
+#
+#  index_jobs_on_organization_id  (organization_id)
+#  index_jobs_on_slug             (slug) UNIQUE
+#  index_jobs_on_user_id          (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (organization_id => organizations.id)
+#  fk_rails_...  (user_id => users.id)
 #
 class Job < ApplicationRecord
   extend FriendlyId
@@ -31,6 +42,7 @@ class Job < ApplicationRecord
 
   belongs_to :user
   belongs_to :organization
+  has_many :candidates
 
   scope :in_organization, -> (org) { where(organization: org) }
 

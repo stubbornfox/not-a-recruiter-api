@@ -1,6 +1,6 @@
 class Api::V1::JobsController < ApplicationController
   before_action :authorize_request
-  before_action :set_job, only: %i[ show update destroy ]
+  before_action :set_job, only: %i[ show update destroy applicants]
 
   # GET /jobs
   def index
@@ -9,7 +9,6 @@ class Api::V1::JobsController < ApplicationController
 
   # GET /jobs/1
   def show
-    render json: @job
   end
 
   # POST /jobs

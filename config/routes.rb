@@ -4,8 +4,9 @@ Rails.application.routes.draw do
       get 'me', to: 'users#me'
       post 'auth/login', to: 'authentication#login'
       resources :job_boards
-      resources :jobs
-      resources :candidates
+      resources :jobs do
+        resources :candidates, only: [:index, :show, :update]
+      end
       resources :users
       resources :organizations do
         resource :organizations_users, only:[] do
@@ -15,7 +16,11 @@ Rails.application.routes.draw do
 
       namespace :publics do
         resources :organizations, only: [:show] do
-          resources :jobs, only: [:index, :show]
+          resources :jobs, only: [:index, :show] do
+            member do
+              post :apply
+            end
+          end
         end
       end
     end
