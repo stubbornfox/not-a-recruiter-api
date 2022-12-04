@@ -1,8 +1,5 @@
-json.partial! @job, as: :job
-json.inbox @job.candidates.inbox.count
-json.screen @job.candidates.screen.count
-json.interview @job.candidates.interview.count
-json.decide @job.candidates.decide.count
-json.offer @job.candidates.offer.count
-json.hired @job.candidates.hired.count
-json.archived @job.candidates.archived.count
+json.(@candidate, :id,:name, :email, :phone, :location)
+
+if @candidate.resume.attached?
+  json.resume rails_blob_url(@candidate.resume)
+end

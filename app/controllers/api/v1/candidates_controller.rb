@@ -7,7 +7,6 @@ class Api::V1::CandidatesController < ApplicationController
   end
 
   def show
-    render json: @candidate
   end
 
   def update
