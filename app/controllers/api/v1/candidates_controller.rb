@@ -1,6 +1,6 @@
 class Api::V1::CandidatesController < ApplicationController
   before_action :set_job
-  before_action :set_candidate, only: [:show]
+  before_action :set_candidate, only: [:show, :update]
 
   def index
     @candidates = @job.candidates.where(stage: params[:stage])
