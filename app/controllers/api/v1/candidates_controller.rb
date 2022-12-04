@@ -11,9 +11,9 @@ class Api::V1::CandidatesController < ApplicationController
 
   def update
     if @candidate.update(candidate_params)
-      render json: @candidate
+      render status: :ok
     else
-      render json: @candidate.errors, status: :unprocessable_entity
+      render status: :unprocessable_entity
     end
   end
 
