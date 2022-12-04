@@ -9,6 +9,7 @@
 #  last_name  :string
 #  location   :string
 #  name       :string
+#  notes      :text
 #  phone      :string
 #  stage      :integer
 #  created_at :datetime         not null

@@ -25,4 +25,8 @@ class Api::V1::CandidatesController < ApplicationController
     def set_job
       @job = Job.find(params[:job_id])
     end
+
+  def candidate_params
+    params.require(:candidate).permit(:notes)
+  end
 end
