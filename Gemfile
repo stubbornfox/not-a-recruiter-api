@@ -45,6 +45,8 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem "annotate"
+  gem "rspec-rails"
+  gem "faker"
 end
 
 gem "capistrano"
@@ -59,3 +61,7 @@ group :development do
   gem 'byebug'
 end
 
+group :test do
+  gem "factory_bot_rails"
+  gem "database_cleaner-active_record"
+end
