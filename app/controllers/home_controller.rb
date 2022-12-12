@@ -5,7 +5,7 @@ class HomeController < ApplicationController
       @organization = @job_board.organization
       render :job_board
       return
-    else
+    elsif params[:id]
       @organization = Organization.find_by(slug: params[:id])
       @job_board = @organization.job_board
       render :job_board
