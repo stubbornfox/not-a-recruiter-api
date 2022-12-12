@@ -63,5 +63,6 @@
 set :stage, :production
 set :rails_env, :production
 set :branch, :main
+set :rvm_custom_path, "/usr/share/rvm"
 server "170.64.248.152", user: "rails", roles: %w(web app db), primary: true
 

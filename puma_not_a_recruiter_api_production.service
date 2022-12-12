@@ -1,3 +1,4 @@
+--Staging
 [Unit]
 Description=Puma HTTP Server for not_a_recruiter_api (production)
 After=network.target
@@ -11,6 +12,28 @@ ExecReload=/bin/kill -TSTP $MAINPID
 StandardOutput=append:/deploy/apps/not_a_recruiter_api/current/log/puma.access.log
 StandardError=append:/deploy/apps/not_a_recruiter_api/current/log/puma.error.log
 Restart=no
+RestartSec=1
+SyslogIdentifier=puma
+
+[Install]
+WantedBy=multi-user.target
+
+
+-- Production
+
+[Unit]
+Description=Puma HTTP Server for not_a_recruiter_api (production)
+After=network.target
+
+[Service]
+Type=simple
+User=rails
+WorkingDirectory=/home/rails/apps/not_a_recruiter_api/current
+ExecStart=/usr/share/rvm/bin/rvm default do bundle exec puma -C /home/rails/apps/not_a_recruiter_api/shared/puma.rb
+ExecReload=/bin/kill -TSTP $MAINPID
+StandardOutput=append:/home/rails/apps/not_a_recruiter_api/current/log/puma.access.log
+StandardError=append:/home/rails/apps/not_a_recruiter_api/current/log/puma.error.log
+Restart=always
 RestartSec=1
 SyslogIdentifier=puma
 
