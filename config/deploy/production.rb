@@ -62,7 +62,6 @@
 
 set :stage, :production
 set :rails_env, :production
-set :deploy_to, "/deploy/apps/not_a_recruiter_api"
 set :branch, :main
-server "54.146.101.185", user: "deploy", roles: %w(web app db)
+server "170.64.248.152", user: "rails", roles: %w(web app db), primary: true
 
