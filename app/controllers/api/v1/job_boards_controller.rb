@@ -31,6 +31,21 @@ class Api::V1::JobBoardsController < ApplicationController
     end
   end
 
+  def custom_domain
+    cname = custom_domain_url
+    case DomainRecordCreator.call
+
+    when DomainRecordCreator::SUCCESS
+      if @job_board.update(custom_domain_url: params[:custom_domain_url], cname: cname)
+        render :show
+      else
+        render json: @job_board.errors, status: :unprocessable_entity
+      end
+    when DomainRecordCreator::FAILURE
+      render json: "Sorry, we can't generate cname at that moment", status: :unprocessable_entity
+    end
+  end
+
   # DELETE /job_boards/1
   def destroy
     @job_board.destroy

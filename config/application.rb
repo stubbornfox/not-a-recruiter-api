@@ -24,5 +24,6 @@ module NotARecruiter
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
     config.active_storage.content_types_to_serve_as_binary -= ['image/svg+xml']
+    config.autoload_paths << "#{root}/app/services/*"
   end
 end

@@ -16,7 +16,9 @@ Rails.application.routes.draw do
 
       namespace :publics do
         resources :organizations, only: [:show] do
-          resource :job_board, only: [:show]
+          resource :job_board, only: [:show] do
+            post :custom_domain
+          end
           resources :jobs, only: [:index, :show] do
             member do
               post :apply
