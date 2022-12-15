@@ -1,6 +1,6 @@
 class Api::V1::JobBoardsController < ApplicationController
   before_action :authorize_request
-  before_action :set_job_board, only: %i[ show update destroy ]
+  before_action :set_job_board, only: %i[ show update destroy custom_domain]
 
   # GET /job_boards
   def index
@@ -32,9 +32,8 @@ class Api::V1::JobBoardsController < ApplicationController
   end
 
   def custom_domain
-    cname = custom_domain_url
-    case DomainRecordCreator.call
-
+    cname = CnameCreator.call
+    case DomainRecordCreator.call(cname)
     when DomainRecordCreator::SUCCESS
       if @job_board.update(custom_domain_url: params[:custom_domain_url], cname: cname)
         render :show

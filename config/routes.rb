@@ -3,7 +3,11 @@ Rails.application.routes.draw do
     namespace :v1 do
       get 'me', to: 'users#me'
       post 'auth/login', to: 'authentication#login'
-      resources :job_boards
+      resources :job_boards do
+        member do
+          post :custom_domain
+        end
+      end
       resources :jobs do
         resources :candidates, only: [:index, :show, :update]
       end
@@ -16,9 +20,7 @@ Rails.application.routes.draw do
 
       namespace :publics do
         resources :organizations, only: [:show] do
-          resource :job_board, only: [:show] do
-            post :custom_domain
-          end
+          resource :job_board, only: [:show]
           resources :jobs, only: [:index, :show] do
             member do
               post :apply
