@@ -11,8 +11,9 @@ class Api::V1::OrganizationsUsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_organizations_user
-      @organizations_user = @current_user.organizations_users.find_by(organization_id: params[:organization_id])
-    end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_organizations_user
+    @organizations_user = @current_user.organizations_users.find_by(organization_id: params[:organization_id])
+  end
 end

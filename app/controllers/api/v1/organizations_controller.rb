@@ -1,6 +1,6 @@
 class Api::V1::OrganizationsController < ApplicationController
   before_action :authorize_request
-  before_action :set_organization, only: %i[ show update destroy]
+  before_action :set_organization, only: %i[show update destroy]
 
   # GET /organizations
   def index
@@ -41,13 +41,14 @@ class Api::V1::OrganizationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_organization
-      @organization = @current_user.organizations.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def organization_params
-      params.require(:organization).permit(:name, :description, :website_url, :slug, :remote_level)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_organization
+    @organization = @current_user.organizations.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def organization_params
+    params.require(:organization).permit(:name, :description, :website_url, :slug, :remote_level)
+  end
 end

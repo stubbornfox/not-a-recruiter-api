@@ -21,9 +21,8 @@ class OrganizationsUser < ApplicationRecord
   private
 
   def reset_active
-    self.class.where.not(id: id).where(user_id: user_id, active: true).update_all(active: false)
+    # rubocop:todo Rails/SkipsModelValidations
+    self.class.where.not(id:).where(user_id:, active: true).update_all(active: false)
+    # rubocop:enable Rails/SkipsModelValidations
   end
 end
-
-
-

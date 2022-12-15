@@ -1,9 +1,9 @@
-rails_env = "production"
+rails_env = 'production'
 environment rails_env
 
-app_dir = File.expand_path("../../..", __FILE__)
+app_dir = File.expand_path('../..', __dir__)
 
-bind  "unix://#{app_dir}/puma.sock"
+bind "unix://#{app_dir}/puma.sock"
 pidfile "#{app_dir}/puma.pid"
 state_path "#{app_dir}/puma.state"
 directory "#{app_dir}"
@@ -11,7 +11,7 @@ directory "#{app_dir}"
 stdout_redirect "#{app_dir}/log/puma.stdout.log", "#{app_dir}/log/puma.stderr.log", true
 
 workers 1
-threads 1,2
+threads 1, 2
 
 daemonize true
 

@@ -12,19 +12,19 @@
 #
 class User < ApplicationRecord
   has_secure_password
-  validates :email, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true # rubocop:todo Rails/UniqueValidationWithoutIndex
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
-  # validates :username, presence: true, uniqueness: true
   validates :password,
             length: { minimum: 6 },
             if: -> { new_record? || !password.nil? }
 
-
-  has_and_belongs_to_many :organizations
-  has_many :organizations_users
-  has_one :active_organization_user,  -> { where(active: true) }, class_name: 'OrganizationsUser'
+  has_many :organizations_users, dependent: :destroy
+  has_many :organizations, through: :organizations_users
+  # rubocop:todo Rails/InverseOf
+  has_one :active_organization_user, -> { where(active: true) }, class_name: 'OrganizationsUser', dependent: :destroy
+  # rubocop:enable Rails/InverseOf
   has_one :organization, through: :active_organization_user
-  has_many :jobs
+  has_many :jobs, dependent: :destroy
 
   has_one_attached :profile_picture
 end

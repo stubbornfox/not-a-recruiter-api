@@ -20,15 +20,15 @@
 #
 #  index_candidates_on_job_id  (job_id)
 #
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe Candidate do
   let(:organization) { create(:organization) }
   let(:user) { create(:user) }
-  let(:job) { create(:job, organization: organization, user: user) }
-  let(:candidate) { create(:candidate, job: job) }
+  let(:job) { create(:job, organization:, user:) }
+  let(:candidate) { create(:candidate, job:) }
 
-  it "creates a candidate" do
+  it 'creates a candidate' do
     expect(candidate).to be_truthy
   end
 end

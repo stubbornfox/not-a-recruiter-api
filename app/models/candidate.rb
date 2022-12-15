@@ -22,7 +22,7 @@
 #
 class Candidate < ApplicationRecord
   has_one_attached :resume
-  enum :stage, [:inbox, :screen, :interview, :decide, :offer, :hired, :archived], default: :inbox
+  enum :stage, %i[inbox screen interview decide offer hired archived], default: :inbox
 
   belongs_to :job
 end

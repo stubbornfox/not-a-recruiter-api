@@ -1,3 +1,3 @@
 json.array! @candidates do |candidate|
-  json.(candidate, :id, :name)
+  json.call(candidate, :id, :name)
 end

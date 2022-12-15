@@ -1,6 +1,6 @@
-Rails.application.routes.draw do
-  namespace :api, defaults: {format: :json} do
-    namespace :v1 do
+Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
+  namespace :api, defaults: { format: :json } do # rubocop:todo Metrics/BlockLength
+    namespace :v1 do # rubocop:todo Metrics/BlockLength
       get 'me', to: 'users#me'
       post 'auth/login', to: 'authentication#login'
       resources :job_boards do
@@ -9,11 +9,11 @@ Rails.application.routes.draw do
         end
       end
       resources :jobs do
-        resources :candidates, only: [:index, :show, :update]
+        resources :candidates, only: %i[index show update]
       end
       resources :users
       resources :organizations do
-        resource :organizations_users, only:[] do
+        resource :organizations_users, only: [] do
           put :active
         end
       end
@@ -21,7 +21,7 @@ Rails.application.routes.draw do
       namespace :publics do
         resources :organizations, only: [:show] do
           resource :job_board, only: [:show]
-          resources :jobs, only: [:index, :show] do
+          resources :jobs, only: %i[index show] do
             member do
               post :apply
             end
@@ -34,6 +34,6 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  get "/:id" => "home#index"
-  root "home#index"
+  get '/:id' => 'home#index'
+  root 'home#index'
 end

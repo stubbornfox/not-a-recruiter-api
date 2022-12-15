@@ -19,14 +19,14 @@
 #
 class Organization < ApplicationRecord
   extend FriendlyId
-  friendly_id :name, use: [:slugged, :finders]
+  friendly_id :name, use: %i[slugged finders]
 
-  has_one :job_board
-  has_and_belongs_to_many :users
-  has_many :organizations_users
-  has_many :jobs
+  has_one :job_board, dependent: :destroy
+  has_many :organizations_users, dependent: :destroy
+  has_many :users, through: :organizations_users
+  has_many :jobs, dependent: :destroy
 
-  enum :remote_level, [:no_remote, :some_remote, :mostly_remote, :fully_distributed], default: :no_remote
+  enum :remote_level, %i[no_remote some_remote mostly_remote fully_distributed], default: :no_remote
 
   def should_generate_new_friendly_id?
     name_changed? || slug.blank?

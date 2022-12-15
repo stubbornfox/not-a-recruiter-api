@@ -10,12 +10,12 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe User do
   let(:user) { create(:user) }
 
-  it "creates a user" do
+  it 'creates a user' do
     expect(user).to be_truthy
   end
 end

@@ -33,14 +33,15 @@ class JobBoard < ApplicationRecord
 
   belongs_to :organization
 
-  enum :og_image_setup, [:default, :custom, :nothing], default: :default
-  enum :header_setup, [:logo_only, :name_only, :logo_and_name], default: :logo_and_name
-  enum :banner_setup, [:no_banner, :image, :video], default: :no_banner
+  enum :og_image_setup, %i[default custom nothing], default: :default
+  enum :header_setup, %i[logo_only name_only logo_and_name], default: :logo_and_name
+  enum :banner_setup, %i[no_banner image video], default: :no_banner
 
   before_update :update_custom_domain_status, if: :custom_domain_url_changed?
 
   private
-    def update_custom_domain_status
-      custom_domain_valid = false
-    end
+
+  def update_custom_domain_status
+    self.custom_domain_valid = false
+  end
 end

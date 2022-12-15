@@ -17,12 +17,12 @@
 #  index_organizations_on_slug     (slug) UNIQUE
 #  index_organizations_on_user_id  (user_id)
 #
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe Organization do
   let(:organization) { create(:organization) }
 
-  it "creates a organization" do
+  it 'creates a organization' do
     expect(organization).to be_truthy
   end
 end

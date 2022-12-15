@@ -1,0 +1,39 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  UseCache: true
+  NewCops: enable
+
+Style/Documentation:
+  Enabled: false
+
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+
+Metrics/MethodLength:
+  Max: 15
+
+Metrics/AbcSize:
+  Max: 17
+
+Layout/LineLength:
+  Max: 120
+
+Rails/BulkChangeTable:
+  AutoCorrect: true
+  Enabled: true
+
+Link/MissingSuper:
+  Enabled: false
+
+Lint/MissingCopEnableDirective:
+  MaximumRangeSize: .inf

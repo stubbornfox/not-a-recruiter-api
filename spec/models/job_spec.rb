@@ -28,14 +28,14 @@
 #  fk_rails_...  (organization_id => organizations.id)
 #  fk_rails_...  (user_id => users.id)
 #
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe Job do
   let(:organization) { create(:organization) }
   let(:user) { create(:user) }
-  let(:job) { create(:job, organization: organization, user: user) }
+  let(:job) { create(:job, organization:, user:) }
 
-  it "creates a job" do
+  it 'creates a job' do
     expect(job).to be_truthy
   end
 end

@@ -1,6 +1,6 @@
 class Api::V1::JobBoardsController < ApplicationController
   before_action :authorize_request
-  before_action :set_job_board, only: %i[ show update destroy custom_domain]
+  before_action :set_job_board, only: %i[show update destroy custom_domain]
 
   # GET /job_boards
   def index
@@ -35,7 +35,7 @@ class Api::V1::JobBoardsController < ApplicationController
     cname = CnameCreator.call
     case DomainRecordCreator.call(cname)
     when DomainRecordCreator::SUCCESS
-      if @job_board.update(custom_domain_url: params[:custom_domain_url], cname: cname)
+      if @job_board.update(custom_domain_url: params[:custom_domain_url], cname:)
         render :show
       else
         render json: @job_board.errors, status: :unprocessable_entity
@@ -51,18 +51,20 @@ class Api::V1::JobBoardsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_job_board
-      @job_board = JobBoard.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def job_board_params
-      params.require(:job_board).permit([
-        :title, :logo_image, :social_media_image,
-        :seo_title, :seo_description,
-        :url, :custom_domain_url,
-        :banner_setup, :banner_video_url, :banner_image,
-        :intro, :header_setup, :og_image_setup, :slug])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_job_board
+    @job_board = JobBoard.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def job_board_params
+    params.require(:job_board).permit(%i[
+                                        title logo_image social_media_image
+                                        seo_title seo_description
+                                        url custom_domain_url
+                                        banner_setup banner_video_url banner_image
+                                        intro header_setup og_image_setup slug
+                                      ])
+  end
 end

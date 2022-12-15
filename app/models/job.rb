@@ -30,21 +30,20 @@
 #
 class Job < ApplicationRecord
   extend FriendlyId
-  friendly_id :title_and_location, use: [:slugged, :finders]
+  friendly_id :title_and_location, use: %i[slugged finders]
 
   include PgSearch::Model
   pg_search_scope :search_any_word,
-                  against: [:title, :location],
+                  against: %i[title location],
                   using: {
                     tsearch: { any_word: true }
                   }
 
-
   belongs_to :user
   belongs_to :organization
-  has_many :candidates
+  has_many :candidates, dependent: :destroy
 
-  scope :in_organization, -> (org) { where(organization: org) }
+  scope :in_organization, ->(org) { where(organization: org) }
 
   def title_and_location
     "#{title} in #{location}"

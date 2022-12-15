@@ -26,13 +26,13 @@
 #  index_job_boards_on_organization_id  (organization_id)
 #  index_job_boards_on_slug             (slug) UNIQUE
 #
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe JobBoard do
   let(:organization) { create(:organization) }
-  let(:job_board) { create(:job_board, organization: organization) }
+  let(:job_board) { create(:job_board, organization:) }
 
-  it "creates a job_board" do
+  it 'creates a job_board' do
     expect(job_board).to be_truthy
   end
 end
