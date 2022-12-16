@@ -1,6 +1,6 @@
 class Api::V1::JobBoardsController < ApplicationController
   before_action :authorize_request
-  before_action :set_job_board, only: %i[show update destroy custom_domain]
+  before_action :set_job_board, only: %i[show update destroy custom_domain refresh_ssl]
 
   # GET /job_boards
   def index
@@ -42,6 +42,22 @@ class Api::V1::JobBoardsController < ApplicationController
       end
     when DomainRecordCreator::FAILURE
       render json: "Sorry, we can't generate cname at that moment", status: :unprocessable_entity
+    end
+  end
+
+  def refresh_ssl
+    if @job_board.custom_domain_valid
+      render :show
+    else
+      if SslCreator.call(@job_board.custom_domain_url)
+        if @job_board.update(custom_domain_valid: true)
+          render :show
+        else
+          render json: @job_board.errors, status: :unprocessable_entity
+        end
+      else
+        render json: "Please check if a DNS record exists for this domain", status: :unprocessable_entity
+      end
     end
   end
 

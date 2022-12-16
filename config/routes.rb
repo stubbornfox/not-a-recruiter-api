@@ -6,6 +6,7 @@ Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
       resources :job_boards do
         member do
           post :custom_domain
+          post :refresh_ssl
         end
       end
       resources :jobs do
