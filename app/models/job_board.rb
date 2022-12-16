@@ -39,6 +39,10 @@ class JobBoard < ApplicationRecord
 
   before_update :update_custom_domain_status, if: :custom_domain_url_changed?
 
+  def hostname
+    "#{cname}.#{Rails.application.credentials[Rails.env.to_sym][:for_domain]}"
+  end
+
   private
 
   def update_custom_domain_status
