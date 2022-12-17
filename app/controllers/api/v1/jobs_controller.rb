@@ -43,9 +43,21 @@ class Api::V1::JobsController < ApplicationController
     @job = Job.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
-  def job_params
-    params.require(:job).permit(:title, :description, :location, :category, :valid_through, :employment_type,
-                                :base_salary, :applicant_requirement_location)
-  end
+    # Only allow a list of trusted parameters through.
+    def job_params
+      params.require(:job).permit(
+        :title,
+        :description,
+        :location,
+        :category,
+        :valid_through,
+        :employment_type,
+        :display_salary_type,
+        :salary_amount,
+        :max_salary_amount,
+        :min_salary_amount,
+        :salary_currency,
+        :salary_timeframe,
+        :applicant_requirement_location)
+    end
 end

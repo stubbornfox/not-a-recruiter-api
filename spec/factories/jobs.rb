@@ -4,11 +4,16 @@
 #
 #  id                             :bigint           not null, primary key
 #  applicant_requirement_location :string
-#  base_salary                    :float
 #  category                       :string
 #  description                    :text
+#  display_salary_type            :integer
 #  employment_type                :string
 #  location                       :string
+#  max_salary_amount              :decimal(, )      default(0.0)
+#  min_salary_amount              :decimal(, )      default(0.0)
+#  salary_amount                  :decimal(, )      default(0.0)
+#  salary_currency                :string           default("USD")
+#  salary_timeframe               :integer
 #  slug                           :string
 #  title                          :string
 #  valid_through                  :datetime

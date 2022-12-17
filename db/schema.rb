@@ -89,11 +89,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_15_194157) do
     t.datetime "updated_at", null: false
     t.datetime "valid_through"
     t.string "employment_type"
-    t.float "base_salary"
     t.string "applicant_requirement_location"
     t.string "slug"
     t.bigint "user_id", null: false
     t.bigint "organization_id", null: false
+    t.integer "display_salary_type"
+    t.decimal "salary_amount", default: "0.0"
+    t.string "salary_currency", default: "USD"
+    t.decimal "max_salary_amount", default: "0.0"
+    t.decimal "min_salary_amount", default: "0.0"
+    t.integer "salary_timeframe"
     t.index ["organization_id"], name: "index_jobs_on_organization_id"
     t.index ["slug"], name: "index_jobs_on_slug", unique: true
     t.index ["user_id"], name: "index_jobs_on_user_id"
