@@ -2,7 +2,7 @@ class HomeController <  ActionController::Base
   layout 'application'
 
   def index
-    if @job_board = JobBoard.find_by(custom_domain_url: request.domain)
+    if @job_board = JobBoard.find_by(custom_domain_url: request.host)
       @organization = @job_board.organization
       @jobs = @organization.jobs.search(params)
       @search_options = get_search_options(@jobs)
