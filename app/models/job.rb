@@ -52,4 +52,18 @@ class Job < ApplicationRecord
   def should_generate_new_friendly_id?
     title_changed? || location_changed? || slug.blank?
   end
+
+  def self.search(params)
+    result = self.all
+    if params[:employment_type].present?
+      result = result.where(employment_type: params[:employment_type])
+    end
+    if params[:category].present?
+      result = result.where(category:  params[:category])
+    end
+    if params[:location].present?
+      result = result.where(location:  params[:location])
+    end
+    result
+  end
 end

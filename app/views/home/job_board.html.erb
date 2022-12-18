@@ -1,1 +1,99 @@
-this is <%= @job_board.title %>
+<% content_for :head do %>
+<title>
+  <%=@organization.name %>
+</title>
+<meta property="og:title" content="<%= @job_board.seo_title_content %>" />
+<meta property="og:description" content="<%= @job_board.seo_description_content %>" />
+<% if @job_board.og_default? && @job_board.logo_image.attached? %>
+<meta property="og:image" content="<%= rails_blob_url(@job_board.logo_image) %>">
+<%end%>
+<% if @job_board.og_custom? && @job_board.social_media_image.attached? %>
+<meta property="og:image" content="<%= rails_blob_url(@job_board.social_media_image)%>">
+<%end%>
+<% end %>
+<header class="border-bottom">
+  <div class="header-container">
+    <div class="organization__info">
+      <% if @job_board.logo_image.attached? && !@job_board.name_only? %>
+      <div class="organization__logo">
+        <%= image_tag @job_board.logo_image %>
+      </div>
+      <% end %>
+      <% if !@job_board.logo_only? %>
+      <h5 class="organization__name">
+        <%= @organization.name %>
+      </h5>
+      <% end %>
+    </div>
+    <% if @organization.website_url.present? %>
+    <a href="<%=@organization.website_url %>" target="_blank" rel="external" class="organization__website">Visit Website</a>
+    <% end %>
+  </div>
+</header>
+<main class="container">
+  <div class="job-board">
+    <div class="banner">
+      <% if @job_board.image_banner? && @job_board.banner_image.attached? %>
+      <%= image_tag @job_board.banner_image, class: 'banner__image' %>
+      <% end %>
+      <% if @job_board.video_banner? && @job_board.banner_video_url.present? %>
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe src="<%= video_embed(@job_board.banner_video_url) %>" frameborder='0' allowfullscreen class="embed-responsive-item"></iframe>
+      </div>
+      <%end%>
+      <div class="banner__text">
+        <h2 class="title">
+          <%= @job_board.title %>
+        </h2>
+        <p>
+          <%= @job_board.intro %>
+        </p>
+      </div>
+    </div>
+    <div class="jobs-container">
+      <div class="jobs-filter">
+        <%= form_tag('', method: :get, class: 'jobs-filter__form') do %>
+        <div class="jobs-filter__field-group">
+          <%= label_tag 'location', 'Job Location' %>
+          <%= select_tag "location", options_for_select(@search_options.locations, params[:location]), prompt: 'All locations', onchange: 'this.form.submit()' %>
+        </div>
+        <div class="jobs-filter__field-group">
+          <%= label_tag 'employment_type', 'Job type' %>
+          <%= select_tag "employment_type", options_for_select(@search_options.employment_type, params[:employment_type]), prompt: 'All types', onchange: 'this.form.submit()' %>
+        </div>
+        <div class="jobs-filter__field-group">
+          <%= label_tag 'category', 'Job category' %>
+          <%= select_tag "category", options_for_select(@search_options.category, params[:category]), prompt: 'All categories', onchange: 'this.form.submit()' %>
+        </div>
+        <% end %>
+      </div>
+      <div class="job-listing">
+        <div class="job-listing__section-header"></div>
+        <ul class="job-listing__jobs">
+          <%@jobs.each do |job| %>
+          <li class="job-listing__job-item">
+            <%= link_to "#{request.path}/#{job.slug}",relative: true, class: "job-listing__job-link" do%>
+            <div>
+              <h3 class="job-listing__job-title">
+                <%=job.title %>
+              </h3>
+              <div class="job-listing__job-info">
+                <span class="job-listing__job-type">
+                  <%=job.employment_type.humanize %></span>
+                <span class="job-listing__job-salary">
+                  <%=job.base_salary %></span>
+                <span class="job-listing__job-location">
+                  <%=job.location %></span>
+              </div>
+            </div>
+            <div class="job-listing__viewjob">
+              View job
+            </div>
+            <% end %>
+          </li>
+          <%end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</main>

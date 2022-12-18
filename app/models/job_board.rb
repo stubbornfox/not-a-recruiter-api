@@ -33,14 +33,22 @@ class JobBoard < ApplicationRecord
 
   belongs_to :organization
 
-  enum :og_image_setup, %i[default custom nothing], default: :default
+  enum :og_image_setup, %i[og_default og_custom og_none], default: :og_default
   enum :header_setup, %i[logo_only name_only logo_and_name], default: :logo_and_name
-  enum :banner_setup, %i[no_banner image video], default: :no_banner
+  enum :banner_setup, %i[no_banner image_banner video_banner], default: :no_banner
 
   before_update :update_custom_domain_status, if: :custom_domain_url_changed?
 
   def hostname
     "#{cname}.#{Rails.application.credentials[Rails.env.to_sym][:for_domain]}" if cname.present?
+  end
+
+  def seo_description_content
+    seo_description || "View our open jobs at #{organization.name}"
+  end
+
+  def seo_title_content
+    seo_title || "Jobs at #{organization.name}"
   end
 
   private
