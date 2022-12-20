@@ -31,4 +31,12 @@ module ApplicationHelper
         "https://player.vimeo.com/video/#{video_id}"
     end
   end
+
+  def job_url(job_slug)
+    if request.url.end_with?("/")
+      "#{request.url}#{job_slug}"
+    else
+      "#{request.url}/#{job_slug}"
+    end
+  end
 end

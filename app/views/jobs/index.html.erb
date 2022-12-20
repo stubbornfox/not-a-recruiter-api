@@ -72,7 +72,7 @@
         <ul class="job-listing__jobs">
           <%@jobs.each do |job| %>
           <li class="job-listing__job-item">
-            <a href='<%= "#{request.url}/#{job.slug}" %>' , class="job-listing__job-link" do%>
+            <a href='<%= job_url(job.slug) %>' , class="job-listing__job-link" do%>
               <div class="job-listing_job-main-content">
                 <h3 class="job-listing__job-title">
                   <%=job.title %>
