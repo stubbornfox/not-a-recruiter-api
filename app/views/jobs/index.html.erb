@@ -72,23 +72,40 @@
         <ul class="job-listing__jobs">
           <%@jobs.each do |job| %>
           <li class="job-listing__job-item">
-            <a href='<%= "#{request.url}/#{job.slug}" %>', class="job-listing__job-link" do%>
-            <div>
-              <h3 class="job-listing__job-title">
-                <%=job.title %>
-              </h3>
-              <div class="job-listing__job-info">
-                <span class="job-listing__job-type">
-                  <%=job.employment_type.humanize %></span>
-                <span class="job-listing__job-salary">
-                  <%=job.base_salary %></span>
+            <a href='<%= "#{request.url}/#{job.slug}" %>' , class="job-listing__job-link" do%>
+              <div class="job-listing_job-main-content">
+                <h3 class="job-listing__job-title">
+                  <%=job.title %>
+                </h3>
                 <span class="job-listing__job-location">
                   <%=job.location %></span>
+                <div class="job-listing__job-info">
+                  <span class="job-listing__job-type">
+                    <%=job.employment_type.humanize %></span>
+                  <div class="line"></div>
+                  <span class="job-listing__job-category">
+                    <%=job.category %></span>
+                  <div class="line"></div>
+                  <i>
+                    <svg width="33" height="34" viewBox="0 0 33 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M8.5 20.7353C10.7091 20.7353 12.5 18.8786 12.5 16.5882C12.5 14.2979 10.7091 12.4412 8.5 12.4412C6.29086 12.4412 4.5 14.2979 4.5 16.5882C4.5 18.8786 6.29086 20.7353 8.5 20.7353Z" stroke="#747474" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                      <path d="M24.5 12.4412C26.7091 12.4412 28.5 10.5845 28.5 8.29415C28.5 6.0038 26.7091 4.14709 24.5 4.14709C22.2909 4.14709 20.5 6.0038 20.5 8.29415C20.5 10.5845 22.2909 12.4412 24.5 12.4412Z" stroke="#747474" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                      <path d="M24.5 29.0295C26.7091 29.0295 28.5 27.1728 28.5 24.8824C28.5 22.5921 26.7091 20.7354 24.5 20.7354C22.2909 20.7354 20.5 22.5921 20.5 24.8824C20.5 27.1728 22.2909 29.0295 24.5 29.0295Z" stroke="#747474" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                      <path d="M12.1001 14.7912L20.9001 10.0912" stroke="#747474" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                      <path d="M12.1001 18.3853L20.9001 23.0853" stroke="#747474" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </i>
+                </div>
               </div>
-            </div>
-            <div class="job-listing__viewjob">
-              View job
-            </div>
+              <div class="job-listing_job-additional-content">
+                <span><%= time_ago_in_words(job.created_at) %> ago </span>
+                <span>
+                  ·
+                </span>
+                <span class="semibold">
+                  <%= pluralize(job.candidates.count, 'applicants') %>
+                </span>
+              </div>
             </a>
           </li>
           <%end %>
@@ -96,5 +113,5 @@
       </div>
     </div>
   </div>
-  <%= render 'shared/footer' %>
 </main>
+<%= render 'shared/footer' %>
