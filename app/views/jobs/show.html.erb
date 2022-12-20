@@ -78,7 +78,7 @@
   </div>
   <div class="job-content container">
     <div class="job-content__description">
-      <%= @job.description.html_safe %>
+      <%= @job.description&.html_safe %>
     </div>
     <div class="job-content__info">
       <h4>About this role</h4>
@@ -88,7 +88,7 @@
       </div>
       <div class="job-content__info__line">
         <label>Application closed</label>
-        <span class="semibold"><%= (@job.created_at + 30.days).strftime('%b %d, %Y') %></span>
+        <span class="semibold"><%= (@job.created_at + 1.month).strftime('%b %d, %Y') %></span>
       </div>
       <div class="job-content__info__line">
         <label>Job Type</label>
