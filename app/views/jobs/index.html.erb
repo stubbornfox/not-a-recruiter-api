@@ -26,7 +26,7 @@
       <% end %>
     </div>
     <% if @organization.website_url.present? %>
-    <a href="<%=@organization.website_url %>" target="_blank" rel="external" class="organization__website">Visit Website</a>
+    <a href="https://#{<%=@organization.website_url %>}" target="_blank" rel="external" class="organization__website">Visit Website</a>
     <% end %>
   </div>
 </header>
@@ -72,7 +72,7 @@
         <ul class="job-listing__jobs">
           <%@jobs.each do |job| %>
           <li class="job-listing__job-item">
-            <%= link_to "#{request.path}/#{job.slug}",relative: true, class: "job-listing__job-link" do%>
+            <a href='<%= "#{request.url}/#{job.slug}" %>', class="job-listing__job-link" do%>
             <div>
               <h3 class="job-listing__job-title">
                 <%=job.title %>
@@ -89,7 +89,7 @@
             <div class="job-listing__viewjob">
               View job
             </div>
-            <% end %>
+            </a>
           </li>
           <%end %>
         </ul>

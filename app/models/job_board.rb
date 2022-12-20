@@ -51,6 +51,10 @@ class JobBoard < ApplicationRecord
     seo_title || "Jobs at #{organization.name}"
   end
 
+  def self.custom_domains
+    pluck(:custom_domain_url).compact_blank.uniq
+  end
+
   private
 
   def update_custom_domain_status

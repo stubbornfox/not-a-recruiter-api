@@ -21,7 +21,8 @@
   --vt-c-text-dark-1: var(--vt-c-white);
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
   --fk-max-width-input: 25rem;
-  --max-width-container: 72rem;
+  --max-width-container: 80rem;
+  --qrh-c-tertiary: #F1EAFC;
 }
 
 :root {
@@ -39,20 +40,21 @@
   --section-gap: 160px;
 }
 
-html,
-body {
-  font-family: 'Inter', sans-serif;
-  margin: 0;
-  color: var(--color-text);
-  font-size: 14px;
+@font-face {
+  font-family: Clash Display Variable;
+  src: url("/fonts/ClashDisplay-Regular.otf") format("opentype");
 }
 
-.container {
-  flex: 1 0 auto;
-  display: flex;
-  flex-direction: column;
-  max-width: var(--max-width-container);
-  margin: 0 auto;
+@font-face {
+  font-family: Clash Display Variable;
+  font-weight: bold;
+  src: url("/fonts/ClashDisplay-Bold.otf") format("opentype");
+}
+
+@font-face {
+  font-family: Clash Display Variable;
+  font-weight: 600;
+  src: url("/fonts/ClashDisplay-SemiBold.otf") format("opentype");
 }
 
 @media (max-width: 650px) {
@@ -69,6 +71,65 @@ body {
     margin: 16px auto 64px;
     padding: 0 16px;
   }
+}
+
+
+html,
+body {
+  font-family: 'Clash Display Variable', 'Inter', sans-serif;
+  margin: 0;
+  color: var(--color-text);
+  font-size: 14px;
+}
+
+.ellipse {
+  width: 4px;
+  height: 4px;
+  background: #454545;
+  border-radius: 50%;
+}
+
+
+.color-black {
+  color: #202430;
+}
+
+.btn {
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 56px;
+  gap: 10px;
+  background: #7330DF;
+  border-radius: 8px;
+  font-family: 'Epilogue';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 160%;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.container {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+}
+
+.line {
+  border-left: 1px solid #D1D1D1;
+  height: 58.06px;
+  width: 0px;
 }
 
 .organization__website {
@@ -254,4 +315,95 @@ body {
   border-radius: 0.25rem;
   padding-left: 0.25rem;
   padding-right: 0.25rem;
+}
+
+.breadcrumb {
+  font-family: 'Epilogue';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 160%;
+  color: rgba(32, 36, 48, 0.5);
+  padding-top: 40px;
+}
+
+.job-list {
+  margin-top: 40px;
+  margin-bottom: 80px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  gap: 181px;
+  max-width: var(--max-width-container);
+  width: 100%;
+  background: #FFFFFF;
+  border: 1px solid #D1D1D1;
+}
+
+.job-list__company-logo {
+  width: 88px;
+  height: 88px;
+}
+
+.job-list__company-logo img {
+  width: 100%;
+  height: 100%;
+}
+
+.job-list__overview {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 24px;
+}
+
+.job-list__overview .job-list__job-title h3 {
+  font-family: 'Clash Display Variable';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 120%;
+  color: #171717;
+  margin: 0;
+}
+
+
+.job-list__overview p.job-list__job_brief {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+}
+
+.job-list__overview p.job-list__job_brief span {
+  font-family: 'Epilogue';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 160%;
+  color: #454545;
+  margin: 0;
+}
+
+.job-list__action {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 30px;
+}
+
+.job-content {
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 72px 124px;
+  gap: 64px;
 }
