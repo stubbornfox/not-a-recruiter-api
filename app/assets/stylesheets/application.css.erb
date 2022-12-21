@@ -23,6 +23,7 @@
   --fk-max-width-input: 25rem;
   --max-width-container: 80rem;
   --qrh-c-tertiary: #F1EAFC;
+  --qrh-c-primary: #7330DF;
 }
 
 :root {
@@ -73,6 +74,9 @@
   }
 }
 
+*:focus {
+  outline: none;
+}
 
 html,
 body {
@@ -80,6 +84,14 @@ body {
   margin: 0;
   color: var(--color-text);
   font-size: 14px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
 }
 
 .ellipse {
@@ -179,6 +191,10 @@ body {
   margin-bottom: 5rem;
 }
 
+.mb-0 {
+  margin-bottom: 0;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -186,6 +202,9 @@ body {
 
 .my-8 {
   margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.mb-8 {
   margin-bottom: 2rem;
 }
 
@@ -221,4 +240,8 @@ body {
   .footer p {
     font-size: 12px;
   }
+}
+
+.text-primary {
+  color: var(--qrh-c-primary);
 }
