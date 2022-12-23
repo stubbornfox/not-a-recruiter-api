@@ -13,6 +13,7 @@ Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
     namespace :v1 do # rubocop:todo Metrics/BlockLength
       get 'me', to: 'users#me'
       post 'auth/login', to: 'authentication#login'
+      post 'auth/google', to: 'authentication#google'
       resources :job_boards do
         member do
           post :custom_domain

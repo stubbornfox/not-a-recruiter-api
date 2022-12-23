@@ -1,5 +1,5 @@
 class Api::V1::AuthenticationController < ApplicationController
-  before_action :authorize_request, except: :login
+  before_action :authorize_request, except: [:login, :google]
 
   # POST /auth/login
   def login # rubocop:todo Metrics/AbcSize
@@ -15,6 +15,30 @@ class Api::V1::AuthenticationController < ApplicationController
                      organization: @user.organization }, status: :ok
     else
       render json: { error: 'unauthorized' }, status: :unauthorized
+    end
+  end
+
+  def google
+    if GoogleAuthVerification.call(params[:id_token])
+      @user = User.find_or_initialize_by(email: params[:email])
+      @user.provider = :google_account
+      @user.profile_picture_url = params[:picture]
+      @user.full_name = params[:name]
+
+      if @user.save
+        token = JsonWebToken.encode(user_id: @user.id)
+        time = Time.now + 24.hours.to_i
+        render json: { token:, exp: time.strftime('%m-%d-%Y %H:%M'),
+                     email: @user.email,
+                     first_name: @user.first_name,
+                     id: @user.id,
+                     organization_ids: @user.organization_ids,
+                     organization: @user.organization }, status: :ok
+      else
+        render json: @user.errors, status: :unprocessable_entity
+      end
+    else
+      render json: { error: 'Token not verified as issued by our app' }, status: :bad_request
     end
   end
 
