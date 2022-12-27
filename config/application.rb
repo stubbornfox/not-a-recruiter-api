@@ -25,5 +25,6 @@ module NotARecruiter
     config.api_only = true
     config.active_storage.content_types_to_serve_as_binary -= ['image/svg+xml']
     config.autoload_paths << "#{root}/app/services/*"
+    config.active_job.queue_adapter = :sidekiq
   end
 end

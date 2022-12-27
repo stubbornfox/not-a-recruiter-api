@@ -27,4 +27,12 @@ class Candidate < ApplicationRecord
   belongs_to :job
 
   validates :email, presence: true
+
+  after_create :notify_new_applicantion
+
+  private
+
+  def notify_new_applicantion
+    NewApplicationJob.perform_later(self.id)
+  end
 end

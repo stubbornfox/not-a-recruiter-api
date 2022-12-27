@@ -1,0 +1,6 @@
+<h3>New application received</h3>
+<span style="background: var(--qrh-c-tertiary); padding: 10px; border-radius: 8px">🙌 Someone just applied to a job you're assigned to</span>
+<p>
+  <%=@candidate.name %> applied to the <%=@job.title %> position. Click the button below view their application.
+</p>
+<a href='<%= "#{Rails.application.credentials[Rails.env.to_sym][:app_url]}/jobs/#{@job.slug}/stages/inbox/applicants/#{@candidate.id}" %>' class="btn btn-primary">View application</a>
