@@ -11,7 +11,7 @@
 <meta property="og:image" content="<%= rails_blob_url(@job_board.social_media_image)%>">
 <%end%>
 <% end %>
-<header class="border-bottom">
+<header class="">
   <div class="header-container">
     <div class="organization__info">
       <% if @job_board.logo_image.attached? && !@job_board.name_only? %>
@@ -30,45 +30,29 @@
     <% end %>
   </div>
 </header>
-<main class="container">
+<main class="">
   <div class="job-board">
-    <div class="banner">
-      <% if @job_board.image_banner? && @job_board.banner_image.attached? %>
-      <%= image_tag @job_board.banner_image, class: 'banner__image' %>
-      <% end %>
-      <% if @job_board.video_banner? && @job_board.banner_video_url.present? %>
-      <div class="embed-responsive embed-responsive-16by9">
-        <iframe src="<%= video_embed(@job_board.banner_video_url) %>" frameborder='0' allowfullscreen class="embed-responsive-item"></iframe>
-      </div>
-      <%end%>
-      <div class="banner__text">
-        <h2 class="title">
-          <%= @job_board.title %>
-        </h2>
-        <p>
-          <%= @job_board.intro %>
-        </p>
-      </div>
-    </div>
     <div class="jobs-container">
       <div class="jobs-filter">
+        <h2>Find your <span>dream job</span></h2>
         <%= form_tag('', method: :get, class: 'jobs-filter__form') do %>
-        <div class="jobs-filter__field-group">
-          <%= label_tag 'location', 'Job Location' %>
-          <%= select_tag "location", options_for_select(@search_options.locations, params[:location]), prompt: 'All locations', onchange: 'this.form.submit()' %>
+         <div class="jobs-filter__field-group custom-select">
+          <%= select_tag "category", options_for_select(@search_options.category, params[:category]), prompt: 'Job category', onchange: 'this.form.submit()' %>
         </div>
-        <div class="jobs-filter__field-group">
-          <%= label_tag 'employment_type', 'Job type' %>
-          <%= select_tag "employment_type", options_for_select(@search_options.employment_type, params[:employment_type]), prompt: 'All types', onchange: 'this.form.submit()' %>
+        <div class="jobs-filter__field-group custom-select">
+          <%= select_tag "location", options_for_select(@search_options.locations, params[:location]), prompt: 'Job Location', onchange: 'this.form.submit()' %>
         </div>
-        <div class="jobs-filter__field-group">
-          <%= label_tag 'category', 'Job category' %>
-          <%= select_tag "category", options_for_select(@search_options.category, params[:category]), prompt: 'All categories', onchange: 'this.form.submit()' %>
+        <div class="jobs-filter__field-group custom-select">
+          <%= select_tag "employment_type", options_for_select(@search_options.employment_type, params[:employment_type]), prompt: 'Job type', onchange: 'this.form.submit()' %>
         </div>
+        <button class="btn btn-primary">Search</button>
         <% end %>
       </div>
-      <div class="job-listing">
-        <div class="job-listing__section-header"></div>
+      <div class="job-listing container">
+        <div class="job-listing__section-header">
+          Showing <span class="semibold"><%=@jobs.count %></span>
+           <%=(@jobs.count > 1) ? "results" : "result" %>
+        </div>
         <ul class="job-listing__jobs">
           <%@jobs.each do |job| %>
           <li class="job-listing__job-item">

@@ -15,9 +15,9 @@ class JobsController <  ActionController::Base
   private
   def get_search_options(jobs)
     OpenStruct.new(
-      locations: jobs.pluck(:location).compact.uniq,
-      employment_type: jobs.pluck(:employment_type).compact.uniq.map{|type| [type.humanize, type]},
-      category: jobs.pluck(:category).compact.uniq,
+      locations: [['All locations', '']] + jobs.pluck(:location).compact.uniq,
+      employment_type: [['All types', '']] + jobs.pluck(:employment_type).compact.uniq.map{|type| [type.humanize, type]},
+      category:  [['All categories', '']] + jobs.pluck(:category).compact.uniq,
     )
   end
 

@@ -22,8 +22,9 @@
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
   --fk-max-width-input: 25rem;
   --max-width-container: 80rem;
-  --qrh-c-tertiary: #F1EAFC;
   --qrh-c-primary: #7330DF;
+  --qrh-c-secondary: #F1EAFC;
+  --qrh-c-tertiary: #F1EAFC;
 }
 
 :root {
@@ -187,6 +188,10 @@ h5 {
   color: #747474;
 }
 
+.footer a {
+  color: #747474;
+}
+
 .mb-20 {
   margin-bottom: 5rem;
 }
@@ -204,6 +209,7 @@ h5 {
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
+
 .mb-8 {
   margin-bottom: 2rem;
 }
@@ -244,4 +250,87 @@ h5 {
 
 .text-primary {
   color: var(--qrh-c-primary);
+}
+
+
+.custom-select {
+  position: relative;
+  width: 320px;
+}
+
+.custom-select select {
+  display: none;
+  /*hide original SELECT element: */
+}
+
+.select-selected {
+  background-color: #ffffff;
+}
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
+  position: absolute;
+  content: "";
+  right: 20px;
+  width: 16px;
+  height: 16px;
+  background-image: url(<%= asset_path 'chevron-down.svg'%>);
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+  background-position-y: 50%;
+  transition-duration: 0.3s;
+  transition-property: transform;
+}
+
+/* Point the arrow upwards when the select box is open (active): */
+.select-selected.select-arrow-active:after {
+  transform: rotate(180deg)
+}
+
+/* style the items (options), including the selected item: */
+.select-items div,
+.select-selected {
+  border: 1px solid transparent;
+  border-color: transparent transparent #D6DDEB transparent;
+  cursor: pointer;
+  font-family: 'Epilogue';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 160%;
+  color: #202430;
+  opacity: 0.9;
+  height: 50px;
+  border: 0;
+  border-bottom: 1px solid #D6DDEB;
+  padding-left: 8px;
+  padding-right: 24px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.select-items div {
+  border-bottom: none;
+}
+
+/* Style items (options): */
+.select-items {
+  position: absolute;
+  background-color: #ffffff;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  box-shadow: 0px 79px 128px rgb(192 192 192 / 9%), 0px 28.8363px 46.7221px rgb(192 192 192 / 6%), 0px 13.9995px 22.6827px rgb(192 192 192 / 5%), 0px 6.86281px 11.1195px rgb(192 192 192 / 4%), 0px 2.71357px 4.39666px rgb(192 192 192 / 3%);
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover,
+.same-as-selected {
+  background-color: #f9f9f9;
 }
