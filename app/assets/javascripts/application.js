@@ -80,3 +80,23 @@ function closeAllSelect(elmnt) {
 /* If the user clicks anywhere outside the select box,
 then close all select boxes: */
 document.addEventListener("click", closeAllSelect);
+
+function cobyJobLink(e, link) {
+  debugger
+  e.preventDefault()
+  e.stopPropagation()
+  navigator.clipboard.writeText(link).then((clipText) =>
+    showToast()
+  )
+}
+
+function showToast() {
+  // Get the snackbar DIV
+  var x = document.getElementsByClassName("toast")[0];
+
+  // Add the "show" class to DIV
+  x.className = "toast show";
+
+  // After 3 seconds, remove the show class from DIV
+  setTimeout(function() { x.className = x.className.replace("show", ""); }, 3000);
+}

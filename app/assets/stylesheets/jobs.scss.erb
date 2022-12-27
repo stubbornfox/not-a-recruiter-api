@@ -30,6 +30,8 @@
 .organization__info {
   display: flex;
   align-items: center;
+  text-decoration: none;
+  color: #171717;
 }
 
 .organization__name {
@@ -343,7 +345,7 @@
 
 
 /*show*/
-.breadcrumb {
+.breadcrumb a {
   font-family: 'Epilogue';
   font-style: normal;
   font-weight: 400;
@@ -351,6 +353,7 @@
   line-height: 160%;
   color: rgba(32, 36, 48, 0.5);
   padding-top: 40px;
+  text-decoration: none;
 }
 
 .job-list {
@@ -434,7 +437,7 @@
 }
 
 .job-content__info {
-  max-width: 376px;
+  min-width: 376px;
   width: 100%;
 }
 
@@ -539,7 +542,7 @@
   }
 
   .job-content__info {
-    max-width: unset;
+    min-width: unset;
   }
 
   .job-content__info h4 {
@@ -630,10 +633,7 @@
     text-decoration: none;
     cursor: pointer;
   }
-
 }
-
-
 
 #applyModal {
   h4 {
@@ -859,4 +859,62 @@
   ::-webkit-file-upload-button {
      display: none;
   }
+}
+
+.toast {
+  visibility: hidden;
+  position: fixed;
+  z-index: 1;
+  right: 0;
+  top: 30px;
+  font-family: 'Epilogue';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 160%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #171717;
+  padding: 12px 16px;
+  gap: 10px;
+  height: 50px;
+  min-width: 312px;
+  box-sizing: border-box;
+  /* Neutrals / 0 */
+
+  background: #ffffff;
+  /* Shadow */
+
+  box-shadow: 0px 79px 128px rgba(192, 192, 192, 0.09), 0px 28.8363px 46.7221px rgba(192, 192, 192, 0.0598508), 0px 13.9995px 22.6827px rgba(192, 192, 192, 0.0475723), 0px 6.86281px 11.1195px rgba(192, 192, 192, 0.0380675), 0px 2.71357px 4.39666px rgba(192, 192, 192, 0.0270615);
+  border-radius: 8px;
+}
+
+.toast.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {top: 0; opacity: 0;}
+  to {top: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {top: 0; opacity: 0;}
+  to {top: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {top: 30px; opacity: 1;}
+  to {top: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {top: 30px; opacity: 1;}
+  to {top: 0; opacity: 0;}
 }

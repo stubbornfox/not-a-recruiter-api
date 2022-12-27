@@ -13,7 +13,7 @@
 <% end %>
 <header class="border-bottom">
   <div class="header-container">
-    <div class="organization__info">
+    <a class="organization__info" href="<%= @home_path %>">
       <% if @job_board.logo_image.attached? && !@job_board.name_only? %>
       <div class="organization__logo">
         <%= image_tag @job_board.logo_image %>
@@ -24,7 +24,7 @@
         <%= @organization.name %>
       </h5>
       <% end %>
-    </div>
+    </a>
     <% if @organization.website_url.present? %>
     <a href="https://<%=@organization.website_url %>" target="_blank" rel="external" class="organization__website">Visit Website</a>
     <% end %>
@@ -34,7 +34,10 @@
   <div style="background: var(--qrh-c-tertiary);">
     <div class="container">
       <div class="breadcrumb">
-        <%= "Jobs / #{@job.category} /"%>
+        <a href="<%= @home_path %>">Jobs</a>/
+        <a href="<%= "#{@home_path}?category=#{@job.category}" %>">
+          <%= @job.category %>
+        </a>/
         <span class="color-black">
           <%= @job.title %>
         </span>
@@ -61,15 +64,11 @@
           </div>
         </div>
         <div class="job-list__action">
-          <a href="#" title="share"><i>
-              <svg width="33" height="34" viewBox="0 0 33 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8.66797 20.7647C10.8771 20.7647 12.668 18.908 12.668 16.6176C12.668 14.3273 10.8771 12.4706 8.66797 12.4706C6.45883 12.4706 4.66797 14.3273 4.66797 16.6176C4.66797 18.908 6.45883 20.7647 8.66797 20.7647Z" stroke="#747474" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M24.668 12.4706C26.8771 12.4706 28.668 10.6139 28.668 8.32357C28.668 6.03321 26.8771 4.17651 24.668 4.17651C22.4588 4.17651 20.668 6.03321 20.668 8.32357C20.668 10.6139 22.4588 12.4706 24.668 12.4706Z" stroke="#747474" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M24.668 29.0589C26.8771 29.0589 28.668 27.2022 28.668 24.9118C28.668 22.6215 26.8771 20.7648 24.668 20.7648C22.4588 20.7648 20.668 22.6215 20.668 24.9118C20.668 27.2022 22.4588 29.0589 24.668 29.0589Z" stroke="#747474" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M12.268 14.8206L21.068 10.1206" stroke="#747474" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M12.268 18.4147L21.068 23.1147" stroke="#747474" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </i></a>
+          <a href="#" onclick="cobyJobLink(event, '<%=request.url %>');return false;" title="share">
+            <i>
+              <%= image_tag  'share.svg' %>
+            </i>
+          </a>
           <div class="line"></div>
           <button class="btn btn-primary btn-apply">Apply</button>
         </div>
@@ -114,15 +113,11 @@
         </div>
       </div>
       <div class="job-list__action">
-        <a href="#" title="share"><i>
-            <svg width="33" height="34" viewBox="0 0 33 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M8.66797 20.7647C10.8771 20.7647 12.668 18.908 12.668 16.6176C12.668 14.3273 10.8771 12.4706 8.66797 12.4706C6.45883 12.4706 4.66797 14.3273 4.66797 16.6176C4.66797 18.908 6.45883 20.7647 8.66797 20.7647Z" stroke="#747474" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M24.668 12.4706C26.8771 12.4706 28.668 10.6139 28.668 8.32357C28.668 6.03321 26.8771 4.17651 24.668 4.17651C22.4588 4.17651 20.668 6.03321 20.668 8.32357C20.668 10.6139 22.4588 12.4706 24.668 12.4706Z" stroke="#747474" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M24.668 29.0589C26.8771 29.0589 28.668 27.2022 28.668 24.9118C28.668 22.6215 26.8771 20.7648 24.668 20.7648C22.4588 20.7648 20.668 22.6215 20.668 24.9118C20.668 27.2022 22.4588 29.0589 24.668 29.0589Z" stroke="#747474" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M12.268 14.8206L21.068 10.1206" stroke="#747474" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M12.268 18.4147L21.068 23.1147" stroke="#747474" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </i></a>
+        <a href="#" onclick="cobyJobLink(event, '<%=request.url %>');return false;" title="share">
+          <i>
+            <%= image_tag 'share.svg' %>
+          </i>
+        </a>
         <div class="line"></div>
         <button class="btn btn-primary btn-apply">Apply</button>
       </div>
@@ -132,6 +127,10 @@
     <%= render 'shared/footer' %>
   </div>
 </main>
+<div class="toast">
+  <%= image_tag 'circle-check.svg' %>
+  <span>URL copied to clipboard 🔗</span>
+</div>
 <%= render 'apply' %>
 <script>
 var modal = document.getElementById("applyModal");

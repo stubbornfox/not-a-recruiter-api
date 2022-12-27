@@ -9,6 +9,7 @@ class JobsController <  ActionController::Base
   end
 
   def show
+    @home_path = request.url.split('/')[0...-1].join('/')
     @job = @organization.jobs.find_by(slug: params[:job_slug])
   end
 

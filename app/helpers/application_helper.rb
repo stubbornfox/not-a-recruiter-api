@@ -33,10 +33,10 @@ module ApplicationHelper
   end
 
   def job_url(job_slug)
-    if request.url.end_with?("/")
-      "#{request.url}#{job_slug}"
-    else
-      "#{request.url}/#{job_slug}"
+    if params[:custom] == true
+      "#{request.base_url + request.path}#{job_slug}"
+    elsif params[:organization_slug]
+      "#{request.base_url + request.path}/#{job_slug}"
     end
   end
 end
