@@ -32,7 +32,7 @@
         <div class="divider"></div>
         <h4>Submit your application</h4>
         <p class="sub-header">The following is required and will only be shared with <%= @organization.name%></p>
-        <%= form_with model: Candidate.new, url: apply_api_v1_publics_organization_job_url(id: @job.id, organization_id: @organization.id), method: :post, id: 'applyJobForm', local: false do |form| %>
+        <%= form_with model: Candidate.new, url: apply_api_v1_publics_organization_job_url(host: Rails.application.credentials[Rails.env.to_sym][:api_url], id: @job.id, organization_id: @organization.id), method: :post, id: 'applyJobForm', local: false do |form| %>
         <div class="resume-wrapper">
           <%= form.label :resume, "Attached your resume", class: 'required mb-0' %>
           <div class="resume">

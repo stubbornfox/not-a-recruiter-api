@@ -33,6 +33,6 @@ class Candidate < ApplicationRecord
   private
 
   def notify_new_applicantion
-    NewApplicationJob.perform_later(self.id)
+    NewApplicationJob.perform_now(self.id)
   end
 end
