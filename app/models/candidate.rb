@@ -25,4 +25,6 @@ class Candidate < ApplicationRecord
   enum :stage, %i[inbox screen interview decide offer hired archived], default: :inbox
 
   belongs_to :job
+
+  validates :email, presence: true
 end

@@ -2,9 +2,7 @@
   <div class="modal-content">
     <div class="header-modal">
       <button class="close">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M5.15213 5.15162C5.37716 4.92666 5.68233 4.80028 6.00052 4.80028C6.31872 4.80028 6.62389 4.92666 6.84892 5.15162L12.0005 10.3032L17.1521 5.15162C17.2628 5.03701 17.3952 4.94559 17.5416 4.8827C17.688 4.81981 17.8455 4.78671 18.0048 4.78532C18.1642 4.78394 18.3222 4.8143 18.4697 4.87464C18.6171 4.93497 18.7511 5.02408 18.8638 5.13675C18.9765 5.24942 19.0656 5.3834 19.1259 5.53088C19.1862 5.67836 19.2166 5.83637 19.2152 5.99571C19.2138 6.15504 19.1807 6.3125 19.1178 6.45891C19.055 6.60531 18.9635 6.73773 18.8489 6.84842L13.6973 12L18.8489 17.1516C19.0675 17.3779 19.1885 17.6811 19.1857 17.9957C19.183 18.3103 19.0568 18.6113 18.8343 18.8338C18.6118 19.0563 18.3108 19.1825 17.9962 19.1852C17.6816 19.188 17.3784 19.067 17.1521 18.8484L12.0005 13.6968L6.84892 18.8484C6.6226 19.067 6.31948 19.188 6.00484 19.1852C5.69021 19.1825 5.38923 19.0563 5.16674 18.8338C4.94425 18.6113 4.81805 18.3103 4.81532 17.9957C4.81258 17.6811 4.93354 17.3779 5.15213 17.1516L10.3037 12L5.15213 6.84842C4.92716 6.62339 4.80078 6.31822 4.80078 6.00002C4.80078 5.68183 4.92716 5.37666 5.15213 5.15162Z" fill="#171717" />
-        </svg>
+        <%= image_tag 'close.svg' %>
       </button>
     </div>
     <div class="">
@@ -34,35 +32,26 @@
         <div class="divider"></div>
         <h4>Submit your application</h4>
         <p class="sub-header">The following is required and will only be shared with <%= @organization.name%></p>
-        <%= form_with url: "#", method: :post do |form| %>
+        <%= form_with model: Candidate.new, url: apply_api_v1_publics_organization_job_url(id: @job.id, organization_id: @organization.id), method: :post, id: 'applyJobForm', local: false do |form| %>
         <div class="resume-wrapper">
           <%= form.label :resume, "Attached your resume", class: 'required mb-0' %>
           <div class="resume">
             <%= form.file_field :resume, class: 'hidden'%>
-            <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g clip-path="url(#clip0_29338_1869)">
-                <path d="M14.9999 7.94125L8.49995 14.4412C8.10212 14.8391 7.87863 15.3786 7.87863 15.9412C7.87863 16.5039 8.10212 17.0434 8.49995 17.4412C8.89777 17.8391 9.43734 18.0626 9.99995 18.0626C10.5626 18.0626 11.1021 17.8391 11.4999 17.4412L17.9999 10.9412C18.7956 10.1456 19.2426 9.06647 19.2426 7.94125C19.2426 6.81603 18.7956 5.7369 17.9999 4.94125C17.2043 4.1456 16.1252 3.69861 14.9999 3.69861C13.8747 3.69861 12.7956 4.1456 11.9999 4.94125L5.49995 11.4412C4.30647 12.6347 3.63599 14.2534 3.63599 15.9412C3.63599 17.6291 4.30647 19.2478 5.49995 20.4412C6.69342 21.6347 8.31212 22.3052 9.99995 22.3052C11.6878 22.3052 13.3065 21.6347 14.4999 20.4412L20.9999 13.9412" stroke="#7330DF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-              </g>
-              <defs>
-                <clipPath id="clip0_29338_1869">
-                  <rect width="24" height="24" fill="white" transform="translate(0 0.941284)" />
-                </clipPath>
-              </defs>
-            </svg>
+            <%= image_tag 'attachment.svg' %>
             Attach Resume/CV
           </div>
         </div>
-        <%= form.label :full_name, "Full name", class: 'required' %>
-        <%= form.text_field :full_name, placeholder: 'Enter your full name' %>
+        <%= form.label :name, "Full name", class: 'required' %>
+        <%= form.text_field :name, placeholder: 'Enter your full name' %>
         <%= form.label :email, "Email", class: 'required' %>
         <%= form.email_field :email, placeholder: 'Enter your email address' %>
-        <%= form.label :phone_number, "Phone number" %>
-        <%= form.text_field :phone_number, placeholder: 'Enter your phone number' %>
+        <%= form.label :phone, "Phone number" %>
+        <%= form.text_field :phone, placeholder: 'Enter your phone number' %>
         <%= form.label :location, "Location" %>
         <%= form.text_field :location, placeholder: 'City, state, etc.' %>
         <div class="divider"></div>
-        <%= form.label :additional_information, "Additional information" %>
-        <%= form.text_area :additional_information, placeholder: 'Add a cover letter or anything else you want to share', cols:"70", rows:"5" %>
+        <%= form.label :notes, "Additional information" %>
+        <%= form.text_area :notes, placeholder: 'Add a cover letter or anything else you want to share', cols:"70", rows:"5" %>
         <div class="divider"></div>
         <%= form.submit "Submit Application", class: 'btn btn-primary btn-submit' %>
         <p class="terms">
