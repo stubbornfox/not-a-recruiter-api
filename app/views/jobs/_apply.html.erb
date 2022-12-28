@@ -24,14 +24,17 @@
                   <%=@job.location %></span>
                 <span class="ellipse"></span>
                 <span>
-                  <%=@job.employment_type.humanize %></span>
+                  <%=@job.employment_type.humanize %>
+                </span>
               </p>
             </div>
           </div>
         </div>
         <div class="divider"></div>
         <h4>Submit your application</h4>
-        <p class="sub-header">The following is required and will only be shared with <%= @organization.name%></p>
+        <p class="sub-header">The following is required and will only be shared with
+          <%= @organization.name%>
+        </p>
         <%= form_with model: Candidate.new, url: apply_api_v1_publics_organization_job_url(host: Rails.application.credentials[Rails.env.to_sym][:api_url], id: @job.id, organization_id: @organization.id), method: :post, id: 'applyJobForm', local: false do |form| %>
         <div class="resume-wrapper">
           <%= form.label :resume, "Attached your resume", class: 'required mb-0' %>
@@ -53,6 +56,7 @@
         <%= form.label :notes, "Additional information" %>
         <%= form.text_area :notes, placeholder: 'Add a cover letter or anything else you want to share', cols:"70", rows:"5" %>
         <div class="divider"></div>
+        <div id="errorMsg"></div>
         <%= form.submit "Submit Application", class: 'btn btn-primary btn-submit' %>
         <p class="terms">
           By sending the request you can confirm that you accept our <a href="#" class="text-primary">Terms of Service</a> and <a href="#" class="text-primary">Privacy Policy</a>

@@ -1,5 +1,3 @@
-//= require rails-ujs
-
 document.addEventListener("DOMContentLoaded", () => {
   var x, i, j, l, ll, selElmnt, a, b, c;
   /* Look for any elements with the class "custom-select": */
@@ -55,18 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
       this.classList.toggle("select-arrow-active");
     });
   }
-
-  document.getElementById('applyJobForm').addEventListener("ajax:success", function(e) {
-    /* When the select box is clicked, close any other select boxes,
-    and open/close the current select box: */
-    alert('Created')
-  });
-
-  document.getElementById('applyJobForm').addEventListener("ajax:error", function(e) {
-    /* When the select box is clicked, close any other select boxes,
-    and open/close the current select box: */
-    alert('Error')
-  });
 });
 
 function closeAllSelect(elmnt) {
@@ -96,17 +82,16 @@ then close all select boxes: */
 document.addEventListener("click", closeAllSelect);
 
 function cobyJobLink(e, link) {
-  debugger
   e.preventDefault()
   e.stopPropagation()
   navigator.clipboard.writeText(link).then((clipText) =>
-    showToast()
+    showToast('copiedToast')
   )
 }
 
-function showToast() {
+function showToast(toastId) {
   // Get the snackbar DIV
-  var x = document.getElementsByClassName("toast")[0];
+  var x = document.getElementById(toastId)
 
   // Add the "show" class to DIV
   x.className = "toast show";

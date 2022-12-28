@@ -35,7 +35,7 @@
     <div class="container">
       <div class="breadcrumb">
         <a href="<%= @home_path %>">Jobs</a>/
-        <a href="<%= "#{@home_path}?category=#{@job.category}" %>">
+        <a href="<%= " #{@home_path}?category=#{@job.category}" %>">
           <%= @job.category %>
         </a>/
         <span class="color-black">
@@ -127,9 +127,13 @@
     <%= render 'shared/footer' %>
   </div>
 </main>
-<div class="toast">
+<div class="toast" id="copiedToast">
   <%= image_tag 'circle-check.svg' %>
   <span>URL copied to clipboard 🔗</span>
+</div>
+<div class="toast" id="appliedToast">
+  <%= image_tag 'circle-check.svg' %>
+  <span>Applied job successfully 👏</span>
 </div>
 <%= render 'apply' %>
 <script>
@@ -152,10 +156,69 @@ applyBtns.forEach((btn) => {
   }
 });
 
-// When the user clicks on <span> (x), close the modal
-closeBtn.onclick = function() {
+function closeModal() {
   modal.style.display = "none";
   backDrop.style.display = "none";
   document.body.style.overflow = "auto";
+}
+
+closeBtn.onclick = closeModal
+var applyForm = document.getElementById("applyJobForm")
+
+applyForm.onsubmit = function(event) {
+  event.preventDefault()
+  event.stopPropagation()
+
+  var hasError = false;
+
+  var resumeEl = document.getElementById("candidate_resume");
+  if (resumeEl.files.length == 0) {
+    hasError = true
+    resumeEl.parentElement.className = "resume error"
+    resumeEl.focus()
+  }
+
+  var candidateNameEl = document.getElementById("candidate_name");
+  if (candidateNameEl.value.trim() === "") {
+    candidateNameEl.className = "error"
+    if (!hasError) {
+      hasError = true
+      candidateNameEl.focus()
+    }
+  }
+
+  var candidateEmailEl = document.getElementById("candidate_email");
+  if (candidateEmailEl.value.trim() === "") {
+    candidateEmailEl.className = "error"
+    if (!hasError) {
+      candidateEmailEl.focus()
+      hasError = true
+    }
+  }
+
+  if (hasError) {
+    return false;
+  } else {
+    const formData = new FormData(applyForm);
+    const request = new XMLHttpRequest();
+    request.onload = function() {
+      if (request.status == '201')
+      {
+          closeModal();
+          showToast('appliedToast')
+      } else {
+        const errMsgEl = document.getElementById("errorMsg");
+        errMsgEl.innerHTML = request.responseText;
+      }
+    }
+    request.onerror = function() {
+      const errMsgEl = document.getElementById("errorMsg");
+      errMsgEl.innerHTML = request.responseText;
+    }
+    request.open("POST", applyForm.action, true);
+    request.send(formData);
+    return false;
+
+  }
 }
 </script>

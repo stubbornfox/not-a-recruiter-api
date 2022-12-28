@@ -27,6 +27,7 @@ class Candidate < ApplicationRecord
   belongs_to :job
 
   validates :email, presence: true
+  validates :name, presence: true
 
   after_create :notify_new_applicantion
 
