@@ -32,9 +32,6 @@ class Api::V1::JobBoardsController < ApplicationController
   end
 
   def custom_domain
-    render json: @job_board.update(custom_domain_url: params[:custom_domain_url])
-    return
-
     cname = CnameCreator.call
     case DomainRecordCreator.call(cname)
     when DomainRecordCreator::SUCCESS
