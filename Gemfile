@@ -45,6 +45,7 @@ gem 'spicy-proton'
 gem 'sprockets'
 gem 'sassc-rails'
 gem 'googleauth'
+gem 'noticed'
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'annotate'

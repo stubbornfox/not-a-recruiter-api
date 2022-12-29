@@ -15,6 +15,7 @@
 #
 class User < ApplicationRecord
   has_secure_password
+  has_noticed_notifications
   validates :email, presence: true, uniqueness: true # rubocop:todo Rails/UniqueValidationWithoutIndex
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password,
