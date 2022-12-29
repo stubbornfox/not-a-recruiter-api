@@ -605,11 +605,11 @@
 }
 
 .modal-content {
-  max-width: 644px;
+  max-width: 650px;
   background-color: white;
   margin: 0 auto;
   padding: 48px 32px;
-  box-sizing: border-box;
+  box-sizing: content-box;
   margin-bottom: 159px;
 }
 
@@ -770,8 +770,9 @@
     border-color: rgb(220, 38, 38);
   }
 
-  #errorMsg {
+  .error-text {
     color: rgb(220, 38, 38);
+    font-size: 13px;
   }
 
 
@@ -845,7 +846,7 @@
     padding: 16px;
     gap: 16px;
 
-    width: 220px;
+    width: 250px;
     background: #F8F8FD;
     /* Brands/Primary */
 
@@ -897,6 +898,14 @@
 
   box-shadow: 0px 79px 128px rgba(192, 192, 192, 0.09), 0px 28.8363px 46.7221px rgba(192, 192, 192, 0.0598508), 0px 13.9995px 22.6827px rgba(192, 192, 192, 0.0475723), 0px 6.86281px 11.1195px rgba(192, 192, 192, 0.0380675), 0px 2.71357px 4.39666px rgba(192, 192, 192, 0.0270615);
   border-radius: 8px;
+}
+
+.help {
+  font-size: 12px;
+  font-family: 'Epilogue';
+  margin-top: 0px;
+  margin-bottom: 0px;
+  color: #747474;
 }
 
 .toast.show {

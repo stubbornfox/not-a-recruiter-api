@@ -45,7 +45,7 @@ gem 'spicy-proton'
 gem 'sprockets'
 gem 'sassc-rails'
 gem 'googleauth'
-gem 'jquery-rails'
+gem 'active_storage_validations', '~> 1.0', '>= 1.0.3'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

@@ -139,14 +139,8 @@
 <script>
 var modal = document.getElementById("applyModal");
 var backDrop = document.getElementById("backdrop");
-
 var applyBtns = document.querySelectorAll("button.btn-apply");
-
-// Get the <span> element that closes the modal
 var closeBtn = document.getElementsByClassName("close")[0];
-
-// When the user clicks on the button, open the modal
-
 
 applyBtns.forEach((btn) => {
   btn.onclick = function() {
@@ -163,7 +157,32 @@ function closeModal() {
 }
 
 closeBtn.onclick = closeModal
-var applyForm = document.getElementById("applyJobForm")
+
+const resumeEl = document.getElementById("candidate_resume");
+const resumeFileNameEl = document.getElementById("candidate_resume_file_name");
+resumeEl.addEventListener('change', (event) => {
+  const target = event.target
+    if (target.files && target.files[0]) {
+      const maxAllowedSize = 5 * 1024 * 1024;
+      if (target.files[0].size > maxAllowedSize) {
+        target.value = ''
+        document.getElementById("candidate_resume_error").innerHTML = 'File size is more than 5MB';
+      } else {
+        document.getElementById("candidate_resume_error").innerHTML = '';
+        resumeFileNameEl.innerHTML = getFileName(target.files[0].name)
+      }
+  }
+})
+
+function getFileName (str) {
+  if (str.length > 22) {
+    return str.substr(0, 11) + '...' + str.substr(-11)
+  }
+
+  return str
+}
+
+const applyForm = document.getElementById("applyJobForm")
 
 applyForm.onsubmit = function(event) {
   event.preventDefault()
