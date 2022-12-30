@@ -9,9 +9,11 @@
       <div class="mx-auto form-wrapper">
         <div class="job-info-wrapper">
           <div class="job-list__overview">
+            <% if @job_board.logo_image.attached? %>
             <div class="job-list__company-logo">
               <%= image_tag @job_board.logo_image %>
             </div>
+            <% end %>
             <div class="job-list__job-title">
               <h3>
                 <%= @job.title %>

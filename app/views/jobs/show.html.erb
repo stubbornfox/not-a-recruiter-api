@@ -44,9 +44,11 @@
       </div>
       <div class="job-list">
         <div class="job-list__overview">
-          <div class="job-list__company-logo">
-            <%= image_tag @job_board.logo_image %>
-          </div>
+          <% if @job_board.logo_image.attached? %>
+            <div class="job-list__company-logo">
+              <%= image_tag @job_board.logo_image %>
+            </div>
+          <% end %>
           <div class="job-list__job-title">
             <h3>
               <%= @job.title %>
