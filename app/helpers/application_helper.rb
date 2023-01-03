@@ -33,10 +33,10 @@ module ApplicationHelper
   end
 
   def job_url(job_slug)
-    if params[:custom] == true
-      "#{request.base_url + request.path}#{job_slug}"
-    elsif params[:organization_slug]
+    if params[:default_domain] == true
       "#{request.base_url + request.path}/#{job_slug}"
+    else
+      "#{request.base_url + request.path}#{job_slug}"
     end
   end
 end

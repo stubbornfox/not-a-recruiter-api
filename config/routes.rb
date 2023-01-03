@@ -1,13 +1,3 @@
-class CustomDomainConstraint
-  def initialize
-    @custom_domain = JobBoard.custom_domains
-  end
-
-  def matches?(request)
-    @custom_domain.include?(request.host)
-  end
-end
-
 Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
   namespace :api, defaults: { format: :json } do # rubocop:todo Metrics/BlockLength
     namespace :v1 do # rubocop:todo Metrics/BlockLength
@@ -43,18 +33,11 @@ Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
     end
   end
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  constraints(CustomDomainConstraint.new) do
-    get '/', to: 'jobs#index', defaults: { custom: true }
-    get '/:job_slug', to: 'jobs#show', defaults: { custom: true }
-  end
-
   constraints host: Rails.application.credentials[Rails.env.to_sym][:jobs_domain] do
-    get '/:organization_slug', to: 'jobs#index', defaults: { custom: false }
-    get '/:organization_slug/:job_slug', to: 'jobs#show', defaults: { custom: false }
+    get '/:organization_slug', to: 'jobs#index', defaults: { default_domain: true }
+    get '/:organization_slug/:job_slug', to: 'jobs#show', defaults: { default_domain: true }
   end
 
-  root 'home#index'
+  get '/:job_slug', to: 'jobs#show'
+  root 'jobs#index'
 end

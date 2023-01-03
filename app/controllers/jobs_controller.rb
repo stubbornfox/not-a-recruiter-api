@@ -1,7 +1,7 @@
 class JobsController <  ActionController::Base
   layout 'application'
-  before_action :default_domain, if: -> { params[:custom] == false }
-  before_action :custom_domain, if: -> { params[:custom] == true }
+  before_action :default_domain, if: -> { params[:default_domain] }
+  before_action :custom_domain, if: -> { !params[:default_domain] }
 
   def index
     @jobs = @organization.jobs.search(params)
@@ -28,7 +28,11 @@ class JobsController <  ActionController::Base
   end
 
   def custom_domain
-    @job_board = JobBoard.find_by(custom_domain_url: request.host)
-    @organization = @job_board.organization
+    if JobBoard.custom_domains.include?(request.host)
+      @job_board = JobBoard.find_by(custom_domain_url: request.host)
+      @organization = @job_board.organization
+    else
+      render nothing: true, status: :ok
+    end
   end
 end
