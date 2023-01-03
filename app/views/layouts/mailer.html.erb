@@ -2,49 +2,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-      :root {
-        --qrh-c-primary: #7330DF;
-        --qrh-c-secondary: #F1EAFC;
-        --qrh-c-tertiary: #F1EAFC;
-      }
-
-      body, html {
-        font-family: Epilogue, Helvetica, Arial
-      }
-
-      body {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        align-items: flex-start;
-      }
-
-      .btn {
-        outline: none;
-        border: none;
-        cursor: pointer;
-      }
-
-      .btn-primary {
-        padding: 14px 56px;
-        gap: 10px;
-        background: #7330DF;
-        border-radius: 8px;
-        font-family: 'Epilogue';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 18px;
-        line-height: 160%;
-        text-align: center;
-        color: #FFFFFF;
-        text-decoration: none;
-      }
-
-    </style>
+    <%= stylesheet_link_tag "mailer", media: "all" %>
   </head>
 
   <body>
