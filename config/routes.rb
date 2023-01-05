@@ -40,4 +40,5 @@ Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
 
   get '/:job_slug', to: 'jobs#show'
   root 'jobs#index'
+  mount ActionCable.server => '/cable'
 end

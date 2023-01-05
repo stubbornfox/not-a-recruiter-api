@@ -15,6 +15,7 @@
 #
 class User < ApplicationRecord
   has_secure_password
+  has_noticed_notifications
   validates :email, presence: true, uniqueness: true # rubocop:todo Rails/UniqueValidationWithoutIndex
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password,
@@ -28,6 +29,7 @@ class User < ApplicationRecord
   # rubocop:enable Rails/InverseOf
   has_one :organization, through: :active_organization_user
   has_many :jobs, dependent: :destroy
+  has_many :notifications, as: :recipient
 
   enum :provider, %i[google_account]
   has_one_attached :profile_picture
