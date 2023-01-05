@@ -20,6 +20,8 @@ Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
         end
       end
 
+      resources :notifications
+
       namespace :publics do
         resources :organizations, only: [:show] do
           resource :job_board, only: [:show]

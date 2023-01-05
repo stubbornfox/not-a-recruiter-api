@@ -36,5 +36,6 @@ class Candidate < ApplicationRecord
 
   def notify_new_applicantion
     NewApplicationJob.perform_later(self.id)
+    NewApplicantNotification.with(candidate: self).deliver(self.job.user)
   end
 end
