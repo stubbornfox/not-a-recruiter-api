@@ -30,7 +30,7 @@ class Candidate < ApplicationRecord
   validates :name, presence: true
   validates :resume, attached: true, size: { less_than_or_equal_to: 5.megabytes , message: 'is too large' }, content_type: %i[docx pdf]
 
-  after_create :notify_new_applicantion
+  after_create_commit :notify_new_applicantion
 
   private
 
