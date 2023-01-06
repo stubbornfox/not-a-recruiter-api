@@ -20,7 +20,9 @@ Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
         end
       end
 
-      resources :notifications
+      resources :notifications do
+        post :mark_as_read, on: :member
+      end
 
       namespace :publics do
         resources :organizations, only: [:show] do

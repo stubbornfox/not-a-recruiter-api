@@ -19,4 +19,11 @@
 class Notification < ApplicationRecord
   include Noticed::Model
   belongs_to :recipient, class_name: "User"
+
+  def message
+    if type == NewApplicantNotification.name
+      candidate = Candidate.find(params[:candidate_id])
+      "#{candidate.name} applied to the #{candidate.job.title} position"
+    end
+  end
 end
