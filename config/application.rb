@@ -26,5 +26,7 @@ module NotARecruiter
     config.active_storage.content_types_to_serve_as_binary -= ['image/svg+xml']
     config.autoload_paths << "#{root}/app/services/*"
     config.active_job.queue_adapter = :sidekiq
+    config.action_cable.disable_request_forgery_protection = true
+    config.action_cable.url = "/cable"
   end
 end
