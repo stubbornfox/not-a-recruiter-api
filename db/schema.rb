@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_24_122156) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_11_142450) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -99,6 +99,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_24_122156) do
     t.index ["user_id"], name: "index_jobs_on_user_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.text "content"
+    t.bigint "room_id", null: false
+    t.bigint "user_id", null: false
+    t.jsonb "reactions"
+    t.boolean "system", default: false
+    t.boolean "saved", default: false
+    t.boolean "distributed", default: false
+    t.boolean "seen", default: false
+    t.boolean "deleted", default: false
+    t.boolean "failure", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_messages_on_room_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "notifications", force: :cascade do |t|
     t.string "recipient_type", null: false
     t.bigint "recipient_id", null: false
@@ -132,6 +149,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_24_122156) do
     t.index ["user_id", "organization_id"], name: "index_organizations_users_on_user_id_and_organization_id"
   end
 
+  create_table "participants", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "room_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_participants_on_room_id"
+    t.index ["user_id"], name: "index_participants_on_user_id"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.string "name"
+    t.bigint "organization_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_rooms_on_organization_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
@@ -148,4 +182,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_24_122156) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "jobs", "organizations"
   add_foreign_key "jobs", "users"
+  add_foreign_key "messages", "rooms"
+  add_foreign_key "messages", "users"
+  add_foreign_key "participants", "rooms"
+  add_foreign_key "participants", "users"
 end

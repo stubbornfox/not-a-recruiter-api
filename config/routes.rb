@@ -10,6 +10,10 @@ Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
           post :refresh_ssl
         end
       end
+      resources :rooms do
+        get :participants, on: :collection
+        resources :messages
+      end
       resources :jobs do
         resources :candidates, only: %i[index show update]
       end
