@@ -16,7 +16,7 @@ class Api::V1::MessagesController < ApplicationController
   # POST /api/v1/messages
   # POST /api/v1/messages.json
   def create
-    @message = Message.new(_params)
+    @message = @room.messages.new(_params)
 
     if @message.save
       render :show, status: :created, location: api_v1_room_message_path(@room, @message)
@@ -53,6 +53,6 @@ class Api::V1::MessagesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def _params
-      params.require(:message).permit(:content, :sender_id, :receiver_id, :reactions, :organization_id)
+      params.require(:message).permit(:content, :user_id)
     end
 end

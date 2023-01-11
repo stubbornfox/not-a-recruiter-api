@@ -14,6 +14,7 @@
 #
 class Room < ApplicationRecord
   has_many :participants, dependent: :destroy
+  has_many :users, through: :participants
   has_many :messages
   belongs_to :organization
 
