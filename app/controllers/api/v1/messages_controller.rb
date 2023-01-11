@@ -1,10 +1,11 @@
 class Api::V1::MessagesController < ApplicationController
   before_action :set_message, only: %i[ show update destroy ]
+  before_action :set_room
 
   # GET /api/v1/messages
   # GET /api/v1/messages.json
   def index
-    @messages = Message.where(receiver: current_user)
+    @messages = @room.messages
   end
 
   # GET /api/v1/messages/1
@@ -18,7 +19,7 @@ class Api::V1::MessagesController < ApplicationController
     @message = Message.new(_params)
 
     if @message.save
-      render :show, status: :created, location: api_v1_message_path@message)
+      render :show, status: :created, location: api_v1_room_message_path(@room, @message)
     else
       render json: @message.errors, status: :unprocessable_entity
     end
@@ -28,7 +29,7 @@ class Api::V1::MessagesController < ApplicationController
   # PATCH/PUT /api/v1/messages/1.json
   def update
     if @message.update(_params)
-      render :show, status: :ok, location: api_v1_message_path@message)
+      render :show, status: :ok, location: api_v1_room_message_path(@room, @message)
     else
       render json: @message.errors, status: :unprocessable_entity
     end
@@ -44,6 +45,10 @@ class Api::V1::MessagesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_message
       @message = Message.find(params[:id])
+    end
+
+    def set_room
+      @room = Room.find(params[:room_id])
     end
 
     # Only allow a list of trusted parameters through.

@@ -14,6 +14,7 @@
 #
 class Room < ApplicationRecord
   has_many :participants, dependent: :destroy
+  has_many :messages
   belongs_to :organization
 
   def self.create_room(user_ids, organization)
