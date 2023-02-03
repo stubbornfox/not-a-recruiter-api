@@ -2,9 +2,8 @@ class Api::V1::NotificationsController < ApplicationController
   before_action :authorize_request
   before_action :set_notification, only: %i[mark_as_read]
 
-  # GET /jobs
   def index
-    @notifications = @current_user.notifications
+    @notifications = @current_user.notifications.newest_first
   end
 
   def mark_as_read

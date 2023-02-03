@@ -7,3 +7,4 @@ end
 if @current_user.first_name.blank? && @current_user.full_name.present?
   json.first_name @current_user.full_name.split(" ").first
 end
+json.has_unread @current_user.notifications.unread.count > 0

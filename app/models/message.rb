@@ -29,4 +29,13 @@
 class Message < ApplicationRecord
   belongs_to :room
   belongs_to :user
+
+  has_many_attached :files
+
+  after_create_commit :notify
+
+  private
+  def notify
+    NewMessage.with(message_id: self.id).deliver(room.users - [self.user])
+  end
 end

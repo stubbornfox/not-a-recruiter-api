@@ -24,6 +24,9 @@ class Notification < ApplicationRecord
     if type == NewApplicantNotification.name
       candidate = Candidate.find(params[:candidate_id])
       "#{candidate.name} applied to the #{candidate.job.title} position"
+     elsif type == NewMessage.name
+      message = Message.find(params[:message_id])
+      "You have new messages from #{message.user.first_name}"
     end
   end
 end

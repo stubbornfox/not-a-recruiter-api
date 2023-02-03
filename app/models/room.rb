@@ -18,6 +18,8 @@ class Room < ApplicationRecord
   has_many :messages
   belongs_to :organization
 
+  scope :recent, -> { order(updated_at: :desc) }
+
   def self.create_room(user_ids, organization)
     room = Room.new(organization: organization)
     user_ids.each do |user_id|

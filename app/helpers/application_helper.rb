@@ -39,4 +39,12 @@ module ApplicationHelper
       "#{request.base_url + request.path}#{job_slug}"
     end
   end
+
+  def user_avatar(user)
+    if user.profile_picture.attached?
+      rails_blob_url(user.profile_picture)
+    elsif user.profile_picture_url.present?
+      user.profile_picture_url
+    end
+  end
 end

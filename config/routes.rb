@@ -12,7 +12,9 @@ Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
       end
       resources :rooms do
         get :participants, on: :collection
-        resources :messages
+        resources :messages do
+          post :upload_file, on: :member
+        end
       end
       resources :jobs do
         resources :candidates, only: %i[index show update]
