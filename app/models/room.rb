@@ -18,7 +18,7 @@ class Room < ApplicationRecord
   has_many :messages
   belongs_to :organization
 
-  scope :recent, -> { order(updated_at: :desc) }
+  scope :recent, -> { joins(:messages).order(updated_at: :desc) }
 
   def self.create_room(user_ids, organization)
     room = Room.new(organization: organization)
@@ -28,5 +28,13 @@ class Room < ApplicationRecord
     room.name = User.find(user_ids.last).first_name
     room.save
     room
+  end
+
+  def recipient(sender)
+    (users - [sender]).first || sender
+  end
+
+  def last_message
+    messages.last
   end
 end
