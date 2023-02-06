@@ -194,6 +194,18 @@ GEM
     jmespath (1.6.2)
     json (2.6.3)
     jwt (2.5.0)
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
     kartograph (0.2.8)
     launchy (2.5.0)
       addressable (~> 2.7)
@@ -412,6 +424,7 @@ DEPENDENCIES
   googleauth
   jbuilder (~> 2.6)
   jwt
+  kaminari
   letter_opener
   noticed
   pg (~> 1.1)

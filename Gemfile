@@ -49,6 +49,7 @@ gem 'active_storage_validations', '~> 1.0', '>= 1.0.3'
 gem 'aws-sdk-s3'
 gem 'premailer-rails', '~> 1.9', '>= 1.9.2'
 gem 'noticed'
+gem 'kaminari'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

@@ -11,6 +11,7 @@ class Api::V1::JobsController < ApplicationController
       end_date = DateTime.parse( params[:end]).utc.to_date
       @jobs = @jobs.where(created_at:  start_date..end_date)
     end
+    @jobs = @jobs.page(page).per(per_page)
   end
 
   # GET /jobs/1
@@ -53,5 +54,13 @@ class Api::V1::JobsController < ApplicationController
   def job_params
     params.require(:job).permit(:title, :description, :location, :category, :valid_through, :employment_type,
                                 :base_salary, :applicant_requirement_location)
+  end
+
+  def per_page
+    params[:per_page] || 1
+  end
+
+  def page
+    params[:page] || 1
   end
 end
