@@ -5,7 +5,7 @@ class Api::V1::RoomsController < ApplicationController
   # GET /api/v1/rooms
   # GET /api/v1/rooms.json
   def index
-    @rooms = Room.includes(:participants).where(participants: { user: @current_user }, organization: @current_user.organization).recent
+    @rooms = Room.includes(:participants).where(participants: { user: @current_user }).recent
   end
 
   # GET /api/v1/rooms/1

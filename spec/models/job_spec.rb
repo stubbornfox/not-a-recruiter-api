@@ -9,7 +9,9 @@
 #  description                    :text
 #  employment_type                :string
 #  location                       :string
+#  needs                          :integer          default(1)
 #  slug                           :string
+#  status                         :integer          default("live")
 #  title                          :string
 #  valid_through                  :datetime
 #  created_at                     :datetime         not null

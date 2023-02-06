@@ -36,6 +36,6 @@ class Message < ApplicationRecord
 
   private
   def notify
-    NewMessage.with(message_id: self.id).deliver(room.users - [self.user])
+    NewMessage.with(room_id: self.room_id, message_id: self.id).deliver(room.users - [self.user])
   end
 end

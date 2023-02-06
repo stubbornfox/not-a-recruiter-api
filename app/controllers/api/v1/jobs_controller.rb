@@ -5,6 +5,12 @@ class Api::V1::JobsController < ApplicationController
   # GET /jobs
   def index
     @jobs = @current_user.jobs.in_organization(@current_user.organization)
+
+    if params[:start].present? && params[:end].present?
+      start_date = DateTime.parse( params[:start]).utc.to_date
+      end_date = DateTime.parse( params[:end]).utc.to_date
+      @jobs = @jobs.where(created_at:  start_date..end_date)
+    end
   end
 
   # GET /jobs/1
