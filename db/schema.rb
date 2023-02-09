@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_06_095142) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_09_082735) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -96,6 +96,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_06_095142) do
     t.bigint "organization_id", null: false
     t.integer "status", default: 1
     t.integer "needs", default: 1
+    t.string "skills", default: [], array: true
+    t.string "categories", default: [], array: true
+    t.string "type_of_employments", default: [], array: true
+    t.string "benefits", default: [], array: true
+    t.float "min_salary", default: 0.0
+    t.float "max_salary", default: 0.0
+    t.text "responsibilities"
+    t.text "who_you_are"
+    t.text "nice_to_have"
     t.index ["organization_id"], name: "index_jobs_on_organization_id"
     t.index ["slug"], name: "index_jobs_on_slug", unique: true
     t.index ["user_id"], name: "index_jobs_on_user_id"

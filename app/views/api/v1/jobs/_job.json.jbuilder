@@ -1,7 +1,7 @@
 json.call(job, :id, :title, :description, :location, :category, :created_at, :updated_at, :due_date,
-          :employment_type, :base_salary, :applicant_requirement_location, :slug, :user_id, :organization_id, :needs, :status, :employment_type)
+          :type_of_employments, :base_salary, :applicant_requirement_location, :slug, :user_id, :organization_id, :needs, :status)
 
-json.display_employment_type job.employment_type.humanize
+json.display_type_of_employments job.type_of_employments.map(&:humanize)
 json.applicants job.candidates.count
 json.display_status job.status.humanize
 
