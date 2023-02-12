@@ -5,7 +5,7 @@ class Api::V1::CandidatesController < ApplicationController
     if params[:job_id]
       @candidates = Candidate.where(job_id: params[:job_id])
     else
-      @candidate = Candidate.all
+      @candidates = Candidate.all
     end
   end
 
