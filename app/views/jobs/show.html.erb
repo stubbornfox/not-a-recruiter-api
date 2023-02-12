@@ -61,7 +61,7 @@
                 <%=@job.location %></span>
               <span class="ellipse"></span>
               <span>
-                <%=@job.employment_type.humanize %></span>
+                <%=@job.employment_type&.humanize %></span>
             </p>
           </div>
         </div>
@@ -96,7 +96,7 @@
       <div class="job-content__info__line">
         <label>Job Type</label>
         <span class="semibold">
-          <%= @job.employment_type.humanize %></span>
+          <%= @job.employment_type&.humanize %></span>
       </div>
       <div class="job-content__info__line">
         <label>Salary</label>
