@@ -1,9 +1,12 @@
 class Api::V1::CandidatesController < ApplicationController
-  before_action :set_job
   before_action :set_candidate, only: %i[show update]
 
   def index
-    @candidates = @job.candidates.where(stage: params[:stage])
+    if params[:job_id]
+      @candidates = Candidate.where(job_id: params[:job_id])
+    else
+      @candidate = Candidate.all
+    end
   end
 
   def show
@@ -20,11 +23,7 @@ class Api::V1::CandidatesController < ApplicationController
   private
 
   def set_candidate
-    @candidate = @job.candidates.find(params[:id])
-  end
-
-  def set_job
-    @job = Job.find(params[:job_id])
+    @candidate = Candidate.find(params[:id])
   end
 
   def candidate_params

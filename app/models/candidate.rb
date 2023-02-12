@@ -11,6 +11,7 @@
 #  name       :string
 #  notes      :text
 #  phone      :string
+#  score      :float            default(0.0)
 #  stage      :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -22,7 +23,7 @@
 #
 class Candidate < ApplicationRecord
   has_one_attached :resume
-  enum :stage, %i[inbox screen interview decide offer hired archived], default: :inbox
+  enum :stage, %i[review shortlisted interview hired declined], default: :review
 
   belongs_to :job
 

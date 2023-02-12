@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_09_082735) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_12_055229) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -55,6 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_09_082735) do
     t.bigint "job_id"
     t.integer "stage"
     t.text "notes"
+    t.float "score", default: 0.0
     t.index ["job_id"], name: "index_candidates_on_job_id"
   end
 

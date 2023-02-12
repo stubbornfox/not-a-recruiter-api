@@ -19,6 +19,7 @@ Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
       resources :jobs do
         resources :candidates, only: %i[index show update]
       end
+      resources :candidates, path: :applicants
       resources :users
       resources :organizations do
         resource :organizations_users, only: [] do
