@@ -53,6 +53,6 @@ class Api::V1::OrganizationsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def organization_params
-    params.require(:organization).permit(:name, :description, :website_url, :slug, :remote_level)
+    params.require(:organization).permit(:name, :description, :website_url, :slug, :remote_level, :instagram, :twitter, :facebook, :linkedin, :youtube)
   end
 end

@@ -4,10 +4,15 @@
 #
 #  id           :bigint           not null, primary key
 #  description  :text
+#  facebook     :string
+#  instagram    :string
+#  linkedin     :string
 #  name         :string
 #  remote_level :integer
 #  slug         :string
+#  twitter      :string
 #  website_url  :string
+#  youtube      :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  user_id      :bigint
