@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_16_051957) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_16_095423) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -154,6 +154,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_16_051957) do
     t.string "facebook"
     t.string "linkedin"
     t.string "youtube"
+    t.string "tech_stacks", default: [], array: true
+    t.string "locations", default: [], array: true
+    t.date "date_founded"
+    t.integer "size"
+    t.string "industry"
     t.index ["slug"], name: "index_organizations_on_slug", unique: true
     t.index ["user_id"], name: "index_organizations_on_user_id"
   end

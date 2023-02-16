@@ -3,13 +3,18 @@
 # Table name: organizations
 #
 #  id           :bigint           not null, primary key
+#  date_founded :date
 #  description  :text
 #  facebook     :string
+#  industry     :string
 #  instagram    :string
 #  linkedin     :string
+#  locations    :string           default([]), is an Array
 #  name         :string
 #  remote_level :integer
+#  size         :integer
 #  slug         :string
+#  tech_stacks  :string           default([]), is an Array
 #  twitter      :string
 #  website_url  :string
 #  youtube      :string
@@ -32,6 +37,7 @@ class Organization < ApplicationRecord
   has_many :jobs, dependent: :destroy
 
   enum :remote_level, %i[no_remote some_remote mostly_remote fully_distributed], default: :no_remote
+  enum :size, %i[micro small medium large]
 
   def should_generate_new_friendly_id?
     name_changed? || slug.blank?
