@@ -22,6 +22,7 @@ Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
       resources :candidates, path: :applicants
       resources :users
       resources :organizations do
+        get :profile, on: :collection
         resource :organizations_users, only: [] do
           put :active
         end

@@ -14,6 +14,10 @@ class Api::V1::OrganizationsController < ApplicationController
     render json: @organization
   end
 
+  def profile
+    @organization = @current_user.organization
+  end
+
   # POST /organizations
   def create
     @organization = @current_user.organizations.new(organization_params)
