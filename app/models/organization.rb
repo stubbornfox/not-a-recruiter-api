@@ -30,6 +30,7 @@
 class Organization < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: %i[slugged finders]
+  has_one_attached :logo_image
 
   has_one :job_board, dependent: :destroy
   has_many :organizations_users, dependent: :destroy
