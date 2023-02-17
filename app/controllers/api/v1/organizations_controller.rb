@@ -18,6 +18,25 @@ class Api::V1::OrganizationsController < ApplicationController
     @organization = @current_user.organization
   end
 
+  def team
+    @team = @current_user.organization.users
+  end
+
+  def add_member
+    @user = User.find_or_initialize_by(email: params[:email])
+
+    if @user.new_record?
+      @user.assign_attributes(email: params[:email], position: params[:position], full_name: params[:name], inviting: true, password: SecureRandom.hex(8))
+    end
+
+    if @user.new_record? || !@current_user.organization.user_ids.include?(@user.id)
+      @user.organizations_users.build(organization: @current_user.organization, active: @user.new_record?)
+      if @user.save
+        NewMemberNotification.with(organization_id: @current_user.organization.id).deliver(@user)
+      end
+    end
+  end
+
   # POST /organizations
   def create
     @organization = @current_user.organizations.new(organization_params)

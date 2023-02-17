@@ -6,8 +6,10 @@
 #  email               :string
 #  first_name          :string
 #  full_name           :string
+#  inviting            :boolean
 #  last_name           :string
 #  password_digest     :string
+#  position            :string
 #  profile_picture_url :string
 #  provider            :integer
 #  created_at          :datetime         not null
