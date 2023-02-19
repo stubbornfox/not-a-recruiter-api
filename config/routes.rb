@@ -4,6 +4,7 @@ Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
       get 'me', to: 'users#me'
       post 'auth/login', to: 'authentication#login'
       post 'auth/google', to: 'authentication#google'
+      post 'auth/reset_password', to: 'authentication#reset_password'
       resources :job_boards do
         member do
           post :custom_domain

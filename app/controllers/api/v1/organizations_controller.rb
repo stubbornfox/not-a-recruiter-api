@@ -24,15 +24,16 @@ class Api::V1::OrganizationsController < ApplicationController
 
   def add_member
     @user = User.find_or_initialize_by(email: params[:email])
+    new_user = @user.new_record?
 
-    if @user.new_record?
-      @user.assign_attributes(email: params[:email], position: params[:position], full_name: params[:name], inviting: true, password: SecureRandom.hex(8))
+    if new_user
+      @user.assign_attributes(email: params[:email], position: params[:position], full_name: params[:name], password: SecureRandom.hex(8), reset_password_token: SecureRandom.hex(24))
     end
 
-    if @user.new_record? || !@current_user.organization.user_ids.include?(@user.id)
-      @user.organizations_users.build(organization: @current_user.organization, active: @user.new_record?)
+    if new_user || @user.organization_ids.exclude?(@current_user.organization.id)
+      @user.organizations_users.build(organization: @current_user.organization, active: new_user)
       if @user.save
-        NewMemberNotification.with(organization_id: @current_user.organization.id).deliver(@user)
+        NewMemberNotification.with(organization_id: @current_user.organization.id, new_user: new_user).deliver(@user)
       end
     end
   end

@@ -6,6 +6,7 @@ class UserMailer < ApplicationMailer
 
   def added_to_team
     @user = params[:recipient]
+    @new_user = params[:new_user]
     mail to: @user.email, subject: "Welcome as new member of #{@user.organization&.name} on Qr Hire"
   end
 end
