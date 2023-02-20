@@ -1,5 +1,5 @@
 class Api::V1::AuthenticationController < ApplicationController
-  before_action :authorize_request, except: [:login, :google, :reset_password]
+  before_action :authorize_request, except: [:login, :google, :reset_password, :forget_password]
 
   # POST /auth/login
   def login # rubocop:todo Metrics/AbcSize
@@ -56,6 +56,16 @@ class Api::V1::AuthenticationController < ApplicationController
                      organization: @user.organization }, status: :ok
     else
       render json: 'Invalid reset password token', status: :not_found
+    end
+  end
+
+  def forget_password
+    if @user = User.find_by(email: params[:email])
+      @user.update(reset_password_token: SecureRandom.alphanumeric(24))
+      UserMailer.forget_password(@user).deliver_now
+      render json: {}, status: :ok
+    else
+      render json: 'Oops! Email address is not associated with a QR Hire account', status: :not_found
     end
   end
 

@@ -9,4 +9,9 @@ class UserMailer < ApplicationMailer
     @new_user = params[:new_user]
     mail to: @user.email, subject: "Welcome as new member of #{@user.organization&.name} on Qr Hire"
   end
+
+  def forget_password(user)
+    @user = user
+    mail to: @user.email, subject: "Reset your password"
+  end
 end

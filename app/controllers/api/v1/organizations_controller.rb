@@ -27,7 +27,7 @@ class Api::V1::OrganizationsController < ApplicationController
     new_user = @user.new_record?
 
     if new_user
-      @user.assign_attributes(email: params[:email], position: params[:position], full_name: params[:name], password: SecureRandom.hex(8), reset_password_token: SecureRandom.hex(24))
+      @user.assign_attributes(email: params[:email], position: params[:position], full_name: params[:name], password: SecureRandom.hex(12), reset_password_token: SecureRandom.alphanumeric(24))
     end
 
     if new_user || @user.organization_ids.exclude?(@current_user.organization.id)

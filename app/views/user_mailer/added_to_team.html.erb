@@ -4,7 +4,7 @@
   <%= @user.organization&.name %>
   <% if @new_user %>
   Please click
-  <%= link_to 'here', "#{Rails.application.credentials[Rails.env.to_sym][:app_url]}/set_password/#{@user.reset_password_token}" %>
+  <%= link_to 'here', "#{Rails.application.credentials[Rails.env.to_sym][:app_url]}/set-password/#{@user.reset_password_token}" %>
   to join the <%= @user.organization&.name %> team on QR Hire
   <% end %>
 </div>
