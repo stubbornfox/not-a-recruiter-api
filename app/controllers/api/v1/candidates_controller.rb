@@ -1,6 +1,6 @@
 class Api::V1::CandidatesController < ApplicationController
+  include ActiveStorage::SetCurrent
   before_action :set_candidate, only: %i[show update]
-
   def index
     if params[:job_id]
       @candidates = Candidate.where(job_id: params[:job_id])
