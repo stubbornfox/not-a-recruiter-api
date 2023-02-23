@@ -53,6 +53,6 @@ class Api::V1::MessagesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def _params
-      params.require(:message).permit(:content, :user_id)
+      params.require(:message).permit(:content, :user_id, reactions: {})
     end
 end
