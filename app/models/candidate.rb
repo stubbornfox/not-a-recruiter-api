@@ -25,6 +25,13 @@ class Candidate < ApplicationRecord
   has_one_attached :resume
   enum :stage, %i[review shortlisted interview hired declined], default: :review
 
+  include PgSearch::Model
+  pg_search_scope :search_any_word,
+                  against: %i[name first_name last_name],
+                  using: {
+                    tsearch: { any_word: true }
+                  }
+
   belongs_to :job
 
   validates :email, presence: true

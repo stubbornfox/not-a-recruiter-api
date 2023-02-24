@@ -7,6 +7,12 @@ class Api::V1::CandidatesController < ApplicationController
     else
       @candidates = Candidate.all
     end
+    if params[:query]
+      @candidates = @candidates.search_any_word(params[:query])
+    end
+    if params[:stages]
+      @candidates = @candidates.where(stage: params[:stages])
+    end
   end
 
   def show
