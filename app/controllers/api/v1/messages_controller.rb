@@ -5,7 +5,7 @@ class Api::V1::MessagesController < ApplicationController
   # GET /api/v1/messages
   # GET /api/v1/messages.json
   def index
-    @messages = @room.messages
+    @messages = @room.messages.order(:created_at)
   end
 
   # GET /api/v1/messages/1
@@ -53,6 +53,6 @@ class Api::V1::MessagesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def _params
-      params.require(:message).permit(:content, :user_id, reactions: {})
+      params.require(:message).permit(:content, :user_id, :edited, :deleted, reactions: {}, reply_message: {})
     end
 end

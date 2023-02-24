@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_19_052639) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_24_024202) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -120,10 +120,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_19_052639) do
     t.boolean "saved", default: false
     t.boolean "distributed", default: false
     t.boolean "seen", default: false
-    t.boolean "deleted", default: false
     t.boolean "failure", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "reply_message"
+    t.datetime "edited"
+    t.datetime "deleted"
     t.index ["room_id"], name: "index_messages_on_room_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end

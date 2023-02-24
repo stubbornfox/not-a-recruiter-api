@@ -7,3 +7,7 @@ json.date message.created_at.to_date
 json.reactions message.reactions
 json.timestamp message.created_at.strftime('%l:%M %p')
 json.distributed true
+json.replyMessage message.reply_message
+json.edited message.edited
+json.deleted message.deleted
+

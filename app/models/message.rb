@@ -2,19 +2,21 @@
 #
 # Table name: messages
 #
-#  id          :bigint           not null, primary key
-#  content     :text
-#  deleted     :boolean          default(FALSE)
-#  distributed :boolean          default(FALSE)
-#  failure     :boolean          default(FALSE)
-#  reactions   :jsonb
-#  saved       :boolean          default(FALSE)
-#  seen        :boolean          default(FALSE)
-#  system      :boolean          default(FALSE)
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  room_id     :bigint           not null
-#  user_id     :bigint           not null
+#  id            :bigint           not null, primary key
+#  content       :text
+#  deleted       :datetime
+#  distributed   :boolean          default(FALSE)
+#  edited        :datetime
+#  failure       :boolean          default(FALSE)
+#  reactions     :jsonb
+#  reply_message :jsonb
+#  saved         :boolean          default(FALSE)
+#  seen          :boolean          default(FALSE)
+#  system        :boolean          default(FALSE)
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  room_id       :bigint           not null
+#  user_id       :bigint           not null
 #
 # Indexes
 #
