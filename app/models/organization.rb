@@ -38,7 +38,7 @@ class Organization < ApplicationRecord
   has_many :jobs, dependent: :destroy
 
   enum :remote_level, %i[no_remote some_remote mostly_remote fully_distributed], default: :no_remote
-  enum :size, %i[micro small medium large]
+  enum :size, %i[micro small medium large], default: :micro
 
   def should_generate_new_friendly_id?
     name_changed? || slug.blank?
