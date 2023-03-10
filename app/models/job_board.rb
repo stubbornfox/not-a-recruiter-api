@@ -38,6 +38,7 @@ class JobBoard < ApplicationRecord
   enum :banner_setup, %i[no_banner image_banner video_banner], default: :no_banner
 
   before_update :update_custom_domain_status, if: :custom_domain_url_changed?
+  after_commit :config_custom_domain, if: :saved_change_to_custom_domain_url?
 
   def hostname
     "#{cname}.#{Rails.application.credentials[Rails.env.to_sym][:for_domain]}" if cname.present?
@@ -59,5 +60,9 @@ class JobBoard < ApplicationRecord
 
   def update_custom_domain_status
     self.custom_domain_valid = false
+  end
+
+  def config_custom_domain
+    ServerConfig.call(custom_domain_url_previously_was, custom_domain_url)
   end
 end
