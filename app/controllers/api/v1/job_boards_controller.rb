@@ -32,16 +32,24 @@ class Api::V1::JobBoardsController < ApplicationController
   end
 
   def custom_domain
-    cname = CnameCreator.call
-    case DomainRecordCreator.call(cname)
-    when DomainRecordCreator::SUCCESS
-      if @job_board.update(custom_domain_url: params[:custom_domain_url], cname:)
+    if @job_board.cname.blank?
+      cname = CnameCreator.call
+      case DomainRecordCreator.call(cname)
+      when DomainRecordCreator::SUCCESS
+        if @job_board.update(custom_domain_url: params[:custom_domain_url], cname:)
+          render :show
+        else
+          render json: @job_board.errors, status: :unprocessable_entity
+        end
+      when DomainRecordCreator::FAILURE
+        render json: "Sorry, we can't generate cname at that moment", status: :unprocessable_entity
+      end
+    else
+      if @job_board.update(custom_domain_url: params[:custom_domain_url])
         render :show
       else
         render json: @job_board.errors, status: :unprocessable_entity
       end
-    when DomainRecordCreator::FAILURE
-      render json: "Sorry, we can't generate cname at that moment", status: :unprocessable_entity
     end
   end
 
