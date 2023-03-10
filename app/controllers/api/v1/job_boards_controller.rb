@@ -54,18 +54,14 @@ class Api::V1::JobBoardsController < ApplicationController
   end
 
   def refresh_ssl
-    if @job_board.custom_domain_valid
-      render :show
-    else
-      if SslCreator.call(@job_board.custom_domain_url)
-        if @job_board.update(custom_domain_valid: true)
-          render :show
-        else
-          render json: @job_board.errors, status: :unprocessable_entity
-        end
+    if SslCreator.call(@job_board.custom_domain_url)
+      if @job_board.update(custom_domain_valid: true)
+        render :show
       else
-        render json: "Please check if a DNS record exists for this domain", status: :unprocessable_entity
+        render json: @job_board.errors, status: :unprocessable_entity
       end
+    else
+      render json: "Please check if a DNS record exists for this domain", status: :unprocessable_entity
     end
   end
 

@@ -6,6 +6,7 @@ class SslCreator < ApplicationService
   end
 
   def call
+    return true if Rails.env.development?
     stdout, stderr, status = Open3.capture3("sh #{Rails.root.join("app/services")}/generate_cert.sh #{@hostname}")
     status.success?
   end
