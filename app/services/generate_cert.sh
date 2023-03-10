@@ -1,7 +1,13 @@
 #!/bin/bash
 
-sudo certbot --nginx -d $1
-sudo systemctl reload nginx
+sudo certbot --nginx -d $1 --quiet --force-renewal
+retVal=$?
+if [ $retVal -ne 0 ]; then
+  echo "Error"
+else
+  sudo systemctl reload nginx
+fi
+exit $retVal
 
 # domains=$(sudo certbot certificates --cert-name qrhire.net | grep Domains | cut -d':' -f2 | sed "s/ /,/g")
 # domains_str=`echo "$1$domains"`

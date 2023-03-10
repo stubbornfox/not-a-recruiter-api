@@ -59,8 +59,10 @@ class JobBoard < ApplicationRecord
   private
 
   def update_custom_domain_status
-    self.cname = nil if custom_domain_url.blank?
-    #TODO: delete cname on DO
+    if custom_domain_url.blank?
+      DeleteDomainRecordJob.perform_later(self.cname)
+      self.cname = nil
+    end
     self.custom_domain_valid = false
   end
 
