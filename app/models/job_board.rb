@@ -59,10 +59,12 @@ class JobBoard < ApplicationRecord
   private
 
   def update_custom_domain_status
+    self.cname = nil if custom_domain_url.blank?
+    #TODO: delete cname on DO
     self.custom_domain_valid = false
   end
 
   def config_custom_domain
-    ServerConfig.call(custom_domain_url_previously_was, custom_domain_url)
+    ServerConfig.call(custom_domain_url_previously_was, custom_domain_url) if Rails.env.production?
   end
 end

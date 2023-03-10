@@ -9,6 +9,7 @@ class DomainRecordCreator < ApplicationService
   end
 
   def call # rubocop:todo Metrics/AbcSize
+    return SUCCESS if Rails.env.development?
     token = Rails.application.credentials[Rails.env.to_sym][:digitalocean_token]
     for_domain = Rails.application.credentials[Rails.env.to_sym][:for_domain]
     client = DropletKit::Client.new(access_token: token)
