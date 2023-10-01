@@ -1,0 +1,13 @@
+services:
+  app:
+    image: not-a-recruiter-api-image
+    environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWD: example
+        POSTGRES_HOST: db
+    ports:
+      - 3000:3000
+  db:
+    image: postgres:15-alpine
+    environment:
+       POSTGRES_PASSWORD: example
